@@ -1,0 +1,13 @@
+/* Fixed Navigation Bar */
+.navbar-fixed-top{
+    border-bottom: 2px solid black;
+}
+
+/* Header/Projects Section */
+.header-image {
+    padding-top: 50px;
+    text-align: center;  
+    background: url() no-repeat center center fixed;
+    background-size: cover;
+    height: 900px;
+}

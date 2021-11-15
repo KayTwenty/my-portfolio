@@ -1,137 +1,19 @@
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+/* CSS Variables */
+:root {
+  --primary: #ddd;
+  --dark: #0f0f0f;
+  --dark2: #141516;
+  --light: #fff;
+  --grey: rgb(233, 233, 233);
+  --shadow: 0 0px 16px rgba(0, 0, 0, 0.2);
+  --box-shadow: 0px 0px 34px rgba(0, 0, 0, 0.08);
+  --purple: #4b2db1;
+  --transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  --gradiant: linear-gradient(73deg, rgba(75, 45, 176, 1), hsl(257, 53%, 56%));
 }
 
 body {
-  font-family: "VT323", monospace;
-  background: var(--clr-gray100);
-  margin: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* || NavBar || */
-
-.nav-list {
-  background: #394b5d;
-  box-shadow: 0px 0px 100px #141414;
-  padding: 1rem 0rem;
-  border-radius: var(--radius);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 25px;
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-}
-
-.nav-item {
-  list-style: none;
-  margin-right: 2rem;
-}
-
-.nav-item a {
-  text-decoration: none;
-  color: white;
-  transition: all 200ms ease-in;
-}
-
-.nav-item a:hover {
-  color: var(--clr-primary-dark);
-}
-
-.nav-item:first-child {
-  margin-right: auto;
-  margin-left: 5rem;
-}
-
-.showcase {
-  position: absolute;
-  right: 0;
-  width: 100%;
-  min-height: 100vh;
-  padding: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #111;
-  transition: 0.5s;
-  z-index: 2;
-}
-
-/* || Front page showcase || */
-
-.showcase.active {
-  right: 300px;
-}
-
-.showcase video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #3b3b3b;
-  mix-blend-mode: overlay;
-}
-
-.text {
-  position: relative;
-  z-index: 10;
-}
-
-.text h3 {
-  font-size: 5em;
-  font-weight: 500;
-  color: #fff;
-  line-height: 0.7em;
-  text-transform: uppercase;
-  min-height: 0rem;
-  max-height: 4rem;
-}
-
-.text p {
-  font-size: 1.5em;
-  color: #fff;
-  margin: 20px 0;
-  font-weight: 200;
-  max-width: 750px;
-}
-
-.text a {
-  display: inline-block;
-  font-size: 1.8em;
-  background: #d8e0e7;
-  padding: 10px 30px;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: 500;
-  margin-top: 10px;
-  color: #111;
-  letter-spacing: 2px;
-  transition: 0.2s;
-  border-radius: 0.5rem;
-}
-
-.text a:hover {
-  letter-spacing: 6px;
-}
-
-.text a:hover {
-  background: var(--clr-primary-dark);
+  margin: 0 0;
+  line-height: 1.4;
+  font-family: "Monserrat", sans-serif;
 }

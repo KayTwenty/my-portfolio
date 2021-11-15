@@ -1,35 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kay - Home</title>
-    <link rel="stylesheet" href="styles/main.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Dave - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="styles/main.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/b43aa12feb.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
+
   <body>
-    <div id="navbar">
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a href="/index.html">KayTwenty</a>
-        </li>
-        <li class="nav-item">
-          <a href="/index.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="/concept.html">Projects</a>
-      </ul>
-    </div>
-    <section class="showcase">
-      <video src="video/video.mp4" muted autoplay loop></video>
-      <div class="overlay"></div>
-      <div class="text">
-        <h3>KayTwenty<br>
-        Web & Game Developer</h3>
-        <p>Greetings, I'm KayTwenty, but people call me Dave. I develop a wide variety of projects such beings,
-          web design, game creation, Discord Bot developing, & maching learning. I'm a deep tech & computer enthusiast, 
-          and have been teaching myself how to code since 2018. Here are some amazing projects
-        </p>
-				<a href="#here" class="btn">Projects</a>
-			</div>
-		</section>
-    <main class="container">
+    <!-- Navigation -->
+    <header>
+      <div class="header-grid">
+        <div class="header-logo">
+          <img src="img/" alt="Insert Logo Here" />
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li>
+              <a target="_blank" href="#">Example</a>
+            </li>
+            <li>
+              <a href="mailto:davidanton037@gmail.com">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <p class="Hero-title">Web & Game Developer</p>
+            <div class="social-media">
+              <a target="_blank" href="https://github.com/KayTwenty">
+                <i class="fab fa-github-alt"></i>
+              </a>
+              <a target="_blank" href="mailto:heyalxdavid@gmail.com">
+                <i class="far fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Project Section -->
+      <section class="work-section">
+        <div class="section-title">
+          <p>Featured Work</p>
+        </div>
+        <div class="work-grid">
+          <div class="card-1 work-card" onclick="projectOne()">
+            <h6 class="card-subhead">Unity Game Website</h6>
+            <p class="card-header">HTML & CSS & WebGL</p>
+          </div>
+          <div class="card-2 work-card" onclick="projectTwo()">
+            <h6 class="card-subhead">Spot Music Discord Bot</h6>
+            <p class="card-header">Mainly CSS, Python(Nextcord)</p>
+          </div>
+          <div class="card-3 work-card" onclick="projectThree()">
+            <h6 class="card-subhead">Joke Website</h6>
+            <p class="card-header">HTML & CSS, JQuery</p>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer>
+        <p>© COPYRIGHT 2021 Dave - Website</p>
+      </footer>
+    </main>
   </body>
 </html>

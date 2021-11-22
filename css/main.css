@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+
 BODY {
   background: #282931;
   background: linear-gradient(90deg, #283048, #859398);
   -webkit-font-smoothing: antialiased;
-  font-family: "Varela Round", sans-serif;
+  font-family: 'Modern Antiqua', cursive;
   height: 100%;
 }
 

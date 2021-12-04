@@ -1,94 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&family=Outfit:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&family=Outfit:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600,700");
 
-/* general config */
 html,
 body {
-  margin: 0px;
-  height: 100%;
+  background: #000;
+  color: #fff;
+  font: 16px/1.5 "IBM Plex Mono";
+}
+body {
+  padding: 2rem;
+}
+main {
+  margin: 0 auto;
+  max-width: 50em;
+}
+p {
+  line-height: 2;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+header nav {
+  display: flex;
   width: 100%;
-  font-family: 'Outfit', sans-serif;
-  background-color: #e8eaed;
+  justify-content: center;
 }
-
-a {
+header nav a {
+  transition: all 100ms;
+  display: block;
+  color: inherit;
   text-decoration: none;
-  color: #e8eaed;
+  padding: 1em;
+}
+header nav a:hover {
+  background: #fff;
+  color: #000;
+  transform: rotate(5deg) scale(1.5);
+}
+header h1 {
+  margin: 1rem 0;
+  font-size: 5rem;
+  font-family: "Outfit", sans-serif;
+}
+:selection {
+  background: #f0f;
 }
 
-/* header */
-.header {
-  padding-left: 300px;
-  padding-right: 300px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #181819;
-}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
 
-.header a {
-  color: #e8eaed;
-  font-size: 20px;
-  margin-left: 25px;
-  margin-right: 25px;
-}
 
-.header .title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 30px;
-  margin-left: 50px;
-  margin-right: 50px;
-  font-weight: 550;
-}
+  header nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  header nav a {
+    transition: all 100ms;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    padding:1rem;
+  }
 
-/* top */
-.top {
-  padding-left: 300px;
-  padding-right: 300px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #181819;
-  transition: padding-left 0.5s, padding-right 0.5s;
-  border-radius: 100px/70px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
 
-.top #left {
-  width: 20%;
-  text-align: center;
-}
-
-.top #left a {
-  font-size: 80px;
-  font-family: 'Outfit', sans-serif;
-}
-
-.top #right {
-  width: 70%;
-  margin-left: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.top #right img {
-  filter: invert(1);
-  /* change from ori black to white */
-  width: 50%;
-  margin-left: 50%;
-}
-
-.top #right a {
-  margin-top: -100px;
-  font-size: 40px;
-  float: left;
-  margin-right: 50%;
 }

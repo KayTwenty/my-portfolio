@@ -47,23 +47,43 @@ header h1 {
   background: #f0f;
 }
 
+#particles-js canvas {
+  display: block;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  -webkit-transition: opacity 0.8s ease, -webkit-transform 1.4s ease;
+  transition: opacity 0.8s ease, transform 1.4s ease;
+}
+#particles-js {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -10;
+  top: 0;
+  left: 0;
+}
+canvas {
+  display: block;
+  position: fixed;
+  z-index: -1;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-
 
   header nav {
     display: flex;
     width: 100%;
     justify-content: center;
   }
-  
+
   header nav a {
     transition: all 100ms;
     display: block;
     color: inherit;
     text-decoration: none;
-    padding:1rem;
+    padding: 1rem;
   }
-
-
 }

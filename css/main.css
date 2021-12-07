@@ -1,12 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&family=Outfit:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600,700");
 
-html {
-  height: 100%;
-}
-
+html,
 body {
-  background: linear-gradient(to bottom, #202020, #111119);
+  background: linear-gradient(120deg, #202020, #111119);
   height: 100%;
   margin: 0;
   overflow: hidden;

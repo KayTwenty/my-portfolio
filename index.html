@@ -3,36 +3,175 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TWΞNTY™</title>
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/phone.css" />
+    <meta name="theme-color" content="#2e2e2e" />
+    <meta property="og:title" content="Kay-Website" />
+    <meta name="description" content="Kay's Personal Website Portfolio" />
+    <meta name="author" content="KayTwenty" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KAYTWΞNTY</title>
+    <!--StyleSheets-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/effects.css" />
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
   </head>
   <body>
-    <main>
-      <header>
-        <h1>TWΞNTY</h1>
-        <nav>
-          <a href="https://github.com/KayTwenty">github</a>
-          <a href="https://meifwa.twenty.cf/">Meifwa Bot</a>
-          <a href="https://midnightcavern.twenty.cf/">Midnight Cavern</a>
-        </nav>
-      </header>
+    <div class="progress-container">
+      <div id="progressbar" class="progress-bar"></div>
+    </div>
+    <section id="top" class="hero">
+      <div id="hero-overlay">
+        <section class="navigation">
+          <header></header>
+        </section>
+        <span id="to-top">
+          <div class="down-arrow floating-arrow">
+            <a href="#about">
+              <i class="fa fa-chevron-down" aria-hidden="true"> </i>
+            </a>
+          </div>
+          <div class="hero-text" id="fadein hero-overlay">
+            <h1>KayTwenty</h1>
+            <h2>Half Stack Open-Sourcerer</h2>
+            <br />
+            <a href="https://github.com/KayTwenty" class="btn">Boot GitHub?</a>
+          </div>
+        </span>
+      </div>
+    </section>
+    <section id="about">
+      <h2 class="heading">About</h2>
       <p>
-        Hello! I'm a developer, but I do all sorts of stuff.
-        I mainly write Python and JavaScript, but I like to
-        look around and experiment with new things, especially
-        programming languages. I enjoy creating things as I
-        come up with an idea for something neat.
+        Hello! I'm a developer, but I do all sorts of stuff. I mainly write
+        Python and JavaScript, but I like to look around and experiment with new
+        things, especially programming languages. I enjoy creating things as I
+        come up with an idea for something neat. My main projects are usually
+        Websites or Discord bots, I've built & tested a ton of them and
+        currently am running two atm. You can check them out at the bottom of
+        this page.
       </p>
-      <p>
-        My main projects are usually Discord bots, 
-        I've built & tested a ton of them and currently 
-        am running two atm. You can check them out by 
-        clicking on top of the page!
-      </p>
-    </main>
-    <div class="rain front-row"></div>
-    <div class="rain back-row"></div> 
-    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script><script  src="./js/main.js"></script>
+    </section>
+    <div id="projects" class="background-alt">
+      <h2 class="heading">Projects</h2>
+      <div class="container">
+        <div class="row">
+          <div class="project shadow-large">
+            <div class="project-image">
+              <img src="assets/img/spot.png" alt="SpotEngine" />
+            </div>
+            <div class="project-info">
+              <h3>SpotEngine Discord Music Bot</h3>
+              <p>
+                Spot is a high functionality Discord Bot which can load and play
+                music at very fast speeds. With Spot's low response time
+                servers, Spot can play very crisp sounding songs in a
+                voice-call. It was one of my first projects using the LavaLink
+                packages and I was happy it that it worked as I suspected.
+                Currently It is still being maintained and worked on.
+              </p>
+              <a href="https://spot.twenty.cf/">View Project </a>
+            </div>
+          </div>
+          <div class="project shadow-large">
+            <div class="project-image">
+              <img src="assets/img/cavern.png" alt="MidNight Cavern" />
+            </div>
+            <div class="project-info">
+              <h3>Midnight Cavern Unity Game</h3>
+              <p>
+                Midnight Cavern is a Top/Down 2D adventure open world game. It
+                will be a dungeon exploration game. Meaning it will bring a
+                story line and a bunch of quests. It's still a work in progress,
+                you check out the releases in the Webpage to play around with
+                the demo version. For in right now, it is still in development
+                meaning it is lacking a ton of features. More features will be
+                planned in the future.
+              </p>
+              <a href="https://midnightcavern.twenty.cf/demo.html"
+                >View Project
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="skills">
+      <h2 class="heading">Programming Proficiency</h2>
+      <ul>
+        <li>Python</li>
+        <li>JavaScript</li>
+        <li>HTMl/CSS</li>
+        <li>C#</li>
+        <li>MongoDB</li>
+        <li>MySQL</li>
+        <li>Flask</li>
+        <li>Docker</li>
+        <li>Vue.JS</li>
+        <li>Next.JS</li>
+        <li>Firebase</li>
+      </ul>
+    </div>
+    <div id="skills" class="background-alt">
+      <h2 class="heading">Technological Proficiency</h2>
+      <ul>
+        <li>Front-End Development</li>
+        <li>Back-End Development</li>
+        <li>Machine Learning</li>
+        <li>DevOps Tooling</li>
+      </ul>
+    </div>
+    <div id="contact-me">
+      <div id="contact-me-overlay">
+        <h2 class="heading">Get in Touch</h2>
+        <div id="contact-me-form">
+          <form method="POST" action="davidanton037@gmail.com">
+            <input
+              type="hidden"
+              name="_subject"
+              value="Contact request from personal website"
+            />
+            <input
+              type="email"
+              class="shadow"
+              name="_replyto"
+              placeholder="Your email"
+              required
+            />
+            <textarea
+              name="message"
+              class="shadow"
+              placeholder="Your message go here"
+              required
+            >
+            </textarea>
+            <button class="btn" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <span>
+        <div class="mobile">
+          <p>
+            <a href="https://github.com/KayTwenty/Kay-Website"
+              ><span class="fa fa-heart love"></span></a
+            >by Kay | KayTwenty
+          </p>
+          <div class="social-mob">
+            <a href="https://github.com/KayTwenty" target="_blank">
+              <img src="assets\img\icons\GitHub.png" alt="KayTwenty - GitHub" />
+            </a>
+          </div>
+          <span id="to-top">
+            <div class="up-arrow floating-arrow">
+              <a href="#top">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+              </a>
+            </div>
+          </span>
+        </div>
+      </span>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="assets/js/scrollbar.js"></script>
   </body>
 </html>

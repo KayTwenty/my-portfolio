@@ -1,16 +1,16 @@
 :root {
-  --mainColor: #606b56;
-  --secondaryColor: #515a48;
+  --mainColor:#609380;
+  --secondaryColor: #a6c5ba;
 
-  --borderColor: #161914;
+  --borderColor: #fff;
 
   --mainText: #fff;
-  --secondaryText: #eeeeee;
+  --secondaryText: white;
 
   --themeDotBorder: #fff;
 
-  --previewBg: rgb(81, 90, 72, 0.8);
-  --previewShadow: #2a2f25;
+  --previewBg: #a6c5ba;
+  --previewShadow:  #609380;
 
-  --buttonColor: #669966;
+  --buttonColor: #bbf1f7;
 }

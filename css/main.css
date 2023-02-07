@@ -63,7 +63,7 @@ h1 {
 }
 
 h1:hover {
-  letter-spacing: 6px;
+  letter-spacing: 3px;
   transition: 0.2s;
 }
 
@@ -77,11 +77,11 @@ h2:hover {
 }
 
 h3 {
-  font-size: 28px;
+  font-size: 23px;
 }
 
 h3:hover {
-  letter-spacing: 4px;
+  letter-spacing: 1px;
   transition: 0.2s;
 }
 

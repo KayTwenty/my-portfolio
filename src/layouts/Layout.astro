@@ -44,12 +44,14 @@ const { showNav, navRefId } = Astro.props;
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-15TB1S1P34"></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag(){
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-15TB1S1P34');
+      gtag("config", "G-15TB1S1P34");
     </script>
   </head>
   <body>

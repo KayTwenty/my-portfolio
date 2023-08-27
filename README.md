@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://kaytwenty.com/">
-    <img src="./assets/images/K-20.png" alt="Logo" width="150" height="150">
+    <img src="./public/K-20.png" alt="Logo" width="150" height="150">
   </a>
 
   <h1 align="center">My Portfolio</h1>

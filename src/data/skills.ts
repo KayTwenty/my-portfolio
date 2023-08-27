@@ -11,14 +11,14 @@ export const skills: SkillType[] = [
         link: 'https://www.python.org/',
     },
     {
-        title: 'HTML5',
-        icon: 'https://s2.svgbox.net/files.svg?ic=html',
-        link: 'https://www.w3schools.com/html/',
+        title: 'Java',
+        icon: 'https://s2.svgbox.net/files.svg?ic=java',
+        link: 'https://www.java.com/en/',
     },
     {
-        title: 'CSS3',
-        icon: 'https://s2.svgbox.net/files.svg?ic=css',
-        link: 'https://www.w3schools.com/css/',
+        title: 'JavaScript',
+        icon: 'https://s2.svgbox.net/files.svg?ic=js',
+        link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
     },
     {
         title: 'C#',

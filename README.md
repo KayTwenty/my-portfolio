@@ -2,9 +2,9 @@
 
 # My Portfolio
 
-> ✂ Built with AstroJS and TypeScript
-> <br><img src="https://img.shields.io/github/last-commit/KayTwenty/my-portfolio?style=for-the-badge" alt="Commit"/> <img src="https://img.shields.io/github/license/KayTwenty/my-portfolio?style=for-the-badge" alt="License"/> <br>
+> ➽ Built with AstroJS and TypeScript
 
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
 ---
 
 ## Overview

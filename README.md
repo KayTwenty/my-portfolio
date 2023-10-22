@@ -1,11 +1,19 @@
-<img width="170" height="170" align="left" style="float: left; margin: 0 10px 0 0; border-radius: 50%;" src="./public/K-20.png">
-
-# My Portfolio
-
-> ➽ Built with AstroJS and TypeScript
-
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
----
+<p align="center">
+  <a>
+    <img src="./public/K-20.png" alt="Logo" width="150" height="150">
+  </a>
+  
+  <h1 align="center">My Portfolio</h1>
+  <p align="center">
+  <img src="https://img.shields.io/github/last-commit/KayTwenty/my-portfolio?style=for-the-badge" alt="Commit"/>
+  <img src="https://img.shields.io/github/license/KayTwenty/my-portfolio?style=for-the-badge" alt="License"/>
+  </p>
+  <p align="center">
+    Built with AstroJS and TypeScript
+    <br />
+    <a href="https://kaytwenty.com">Explore Portfolio</a>
+  </p>
+</p>
 
 ## Overview
 

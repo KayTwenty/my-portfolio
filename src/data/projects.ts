@@ -26,9 +26,9 @@ interface Project {
     },
     {
       title: "SpotVerse🔊",
-      description: "A Discord bot which can play high quality music into a Discord Voice call. It supports Youtube, Spotify & Twitch.",
-      link: "https://spot.kaytwenty.com/",
+      description: "A Discord bot which can play high quality music into a Discord Voice call. It supports Youtube, Spotify & Soundcloud.",
+      link: "https://spotverse.cc/",
       stack:
-        "NodeJS, Discord.JS, Mongo, Docker",
+        "Discord.JS v14, TypeScript, Nextjs, TailwindCSS, MongoDB",
     },
   ];

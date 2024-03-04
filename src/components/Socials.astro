@@ -1,17 +1,23 @@
 ---
 import SocialIcon from "./socialIcon.astro";
 import { FaGithub, FaLinkedin } from "react-icons/fa/index";
+import { SiLeetcode } from "react-icons/si";
 ---
 
-<div class="flex items-center space-x-7 text-base font-medium leading-none from-green-400 sm:text-lg">
+<div class="flex items-center space-x-7 text-base font-medium leading-none from-green-400 sm:text-lg text-gray-200">
   <SocialIcon
     Icon={FaGithub}
-    title="Github"
+    title="GitHub"
     link="https://github.com/KayTwenty"
   />
   <SocialIcon
     Icon={FaLinkedin}
-    title="linkedin"
+    title="LinkedIn"
     link="https://www.linkedin.com/in/anton-david/"
+  />
+  <SocialIcon
+    Icon={SiLeetcode}
+    title="LeetCode"
+    link="https://leetcode.com/KayTwenty/"
   />
 </div>

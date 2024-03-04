@@ -18,13 +18,13 @@ const { title, link, substring, description, image } = Astro.props;
       {image && <img src={image} alt={title} class="w-14 mr-5" />}
       <div class="grow">
         <h3
-          class="text-xl font-medium text-rose-100/80 group-hover:underline underline-offset-4"
+          class="text-xl font-medium text-gray-200/80 group-hover:underline underline-offset-4"
         >
           {title}
         </h3>
-        <p class="text-lg text-rose-100/50">{substring}</p>
+        <p class="text-lg text-gray-100/50">{substring}</p>
       </div>
     </div>
-    <p class="mt-5 text-xl text-rose-100/80">{description}</p>
+    <p class="mt-5 text-xl text-gray-100/80">{description}</p>
   </div>
 </a>

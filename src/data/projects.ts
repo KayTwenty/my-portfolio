@@ -29,6 +29,7 @@ export const projects: Project[] = [
       "A livestreaming platform with zero censorship, powered by WebRTC and IPFS.",
     link: "https://github.com/KayTwenty/LiveVHS",
     stack: "NextJS, TypeScript, TailwindCSS, PrismaDB, WebRTC",
+    image: "https://raw.githubusercontent.com/KayTwenty/LiveVHS/main/public/logo.png",
   },
   {
     title: "SpotVerse - Discord Bot",

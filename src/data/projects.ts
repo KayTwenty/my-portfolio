@@ -20,7 +20,7 @@ export const projects: Project[] = [
     description:
       "A website for an Apple technician repair shop located in Kitchener Ontario.",
     link: "https://www.macrepairman.ca/",
-    stack: "NodeJS, EJS, CSS3, Bootstrap, Docker",
+    stack: "AstroJS, React, CSS3, Bootstrap, JQuery",
     image: "https://avatars.githubusercontent.com/u/127373412?s=200&v=4",
   },
   {
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     link: "https://spotverse.cc/",
     stack: "Discord.JS v14, TypeScript, Nextjs, TailwindCSS, MongoDB",
     image:
-      "https://cdn.discordapp.com/avatars/886349150923390986/2cb7a571cde5f863465bcaf1f02d96da.png",
+      "https://www.spotverse.cc/img/logo.png",
   },
   {
     title: "Midnight Cavern - Game",

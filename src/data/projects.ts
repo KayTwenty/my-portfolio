@@ -37,8 +37,7 @@ export const projects: Project[] = [
       "A Discord bot which can play high quality music into a Discord Voice call. It supports Youtube, Spotify & Soundcloud.",
     link: "https://spotverse.cc/",
     stack: "Discord.JS v14, TypeScript, Nextjs, TailwindCSS, MongoDB",
-    image:
-      "https://www.spotverse.cc/img/logo.png",
+    image: "https://www.spotverse.cc/img/logo.png",
   },
   {
     title: "Midnight Cavern - Game",
@@ -48,11 +47,5 @@ export const projects: Project[] = [
     stack: "Unity2D, C#",
     image:
       "https://raw.githubusercontent.com/MidnightCavern/.github/main/assets/cavernlogo.png",
-  },
-  {
-    title: "RuneEngine - Game Engine",
-    description: "A 2D game engine made with Java and OpenGL.",
-    link: "https://github.com/KayTwenty/RuneEngine",
-    stack: "Java, Gradle, OpenGL, LWJGL",
   },
 ];

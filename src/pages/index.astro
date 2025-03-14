@@ -1,6 +1,102 @@
 ---
-import Layout from `@layouts/Layout.astro`;
----
-<Layout title="David Anton">
+import Layout from '@/layouts/Layout.astro';
+import ProjectCard from '@/components/RepoCard.astro';
+import { technologies } from '@/utils/data';
+import TechBadge from "@/components/TechBadge.astro";
+import { Image } from 'astro:assets';
 
+type TechBadgeProps = {
+	name: string;
+	imgSrc: string;
+	altSrc: string;
+	link: string;
+	ariaLink: string;
+};
+
+type PinnedRepos = {
+	owner: string
+	repo: string
+	link: string
+	description: string
+	image: string
+	language: string
+	languageColor: string
+	stars: number
+	forks: number
+}
+
+const pinnedRepos = await fetch(
+	'https://gh-pinned-repos-tsj7ta5xfhep.deno.dev/?username=kaytwenty'
+)
+const repos = await pinnedRepos.json()
+---
+
+<Layout title="David Anton | Home">
+	<main>
+		<div class="flex flex-col-reverse items-center justify-center md:flex-row">
+			<div class="w-9/12 text-white md:w-[450px]">
+				<h1 class="mb-1 text-3xl font-bold tracking-tight md:text-5xl">
+					David Anton
+				</h1>
+				<h2 class='mt-2 text-lg'>Full-Stack Developer | Computer Sales Associate	</h2>
+				<p class='mt-4 text-left'>
+					Howdy! I'm <span id='age'></span> y/o developer who writes in NodeJS & TypeScript, yet constantly exploring new technologies for fun. 
+					My focus primarily revolves around software engineering, gaming, and 3D & Resin Printing. I am also interested in <strong
+					  >Systems Engineering</strong
+					>, <strong>Server Sided Development</strong> and <strong>Backend Development</strong>
+				  </p>
+				</div>
+				<Image
+					class='mb-10 ml-0 h-[120px] w-[120px] rounded-full md:mb-0 md:ml-10 md:h-[240px] md:w-[240px]'
+					src='https://avatars.githubusercontent.com/kaytwenty'
+					alt='David Anton'
+					inferSize={true}
+					loading='eager'
+				/>
+			</div>
+			<div class='my-10 flex items-center justify-center md:my-16'>
+				<div class='w-9/12 text-white md:w-[740px]'>
+					<h2 class='text-3xl font-bold'>Technologies</h2>
+					<p class='mt-4 text-left'>
+						I have been involved in this endeavor for nearly 5 years, 
+						and it has been a journey filled with valuable lessons and personal growth.
+						These are the technologies that I love working with:
+					</p>
+					<div class="mt-10 grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-x-4 md:gap-y-8">
+						{
+							technologies.map((tech: TechBadgeProps) => (
+							  <a
+								href={tech.link}
+								class='cursor-pointer text-gray-300'
+								aria-label={tech.ariaLink}
+							  >
+								<TechBadge {...tech} />
+							  </a>
+							))
+						  }
+					</div>
+				</div>
+			</div>
+			<div class='my-10 flex items-center justify-center md:my-16'>
+				<div class='w-9/12 text-white md:w-[740px]'>
+					<h2 class='text-3xl font-bold'>Projects</h2>
+					<p class='mt-4 text-left'>
+						Here are some of the projects that I have worked on:
+					</p>
+					<div
+						class='mt-10 grid grid-cols-1 gap-y-5 md:grid-cols-2 md:gap-x-4 md:gap-y-8'
+					>
+						{repos.map((repo: PinnedRepos) => <ProjectCard {...repo} />)}
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 </Layout>
+
+<script>
+	import { getYearDiffFromDate } from "@/utils/getYearDiffFromDate";
+	const ageElement = document.getElementById('age');
+
+	ageElement!.innerText = getYearDiffFromDate('05/27/2005').toString();
+</script>

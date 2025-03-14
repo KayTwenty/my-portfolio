@@ -1,22 +1,23 @@
 ---
-import { GradientBackground } from "../components/GradientBackground";
+import Navbar from "@/components/Navbar.astro";
+import HeadTags from "@/components/HeadTags.astro";
 import { Head } from "astro-capo";
-import HeadTags from "../components/HeadTags.astro";
 
 export interface Props {
-  title: string;
-  description?: string;
+	title: string,
+	description?: string,
 }
 
-const { title, description = "Personal Website of David Anton" } = Astro.props;
+const { title, description = "Personal website of David Anton" } = Astro.props;
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-  <Head>
-    <HeadTags title={title} description={description} />
-  </Head>
-  <body>
-    <slot />
-    <GradientBackground client:only="react"/>
-  </body>
+	<Head>
+		<HeadTags title={title} description={description} />
+	</Head>
+	<Navbar />
+	<body>
+		<slot />
+	</body>
 </html>

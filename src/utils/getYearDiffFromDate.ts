@@ -3,4 +3,4 @@ export const getYearDiffFromDate = (date: string) => {
     return Math.abs(
       new Date(Date.now() - dateTime.getTime()).getUTCFullYear() - 1970
     );
-  };
+};

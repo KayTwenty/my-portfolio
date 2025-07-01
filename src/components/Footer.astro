@@ -2,10 +2,14 @@
 import Link from "./Link.astro";
 ---
 
-<div class="mt-20 pb-36 text-base">
-  <p class="text-gray-600">
-    Built with <Link href="https://astro.build/" title="AstroJS" />,
-    <Link href="https://reactjs.org/" title="ReactJS" /> &{" "}
-    <Link href="https://tailwindcss.com" title="Tailwind" />
-  </p>
-</div>
+<footer class="mt-20 pb-36 text-base w-full flex justify-center">
+  <div class="max-w-2xl w-full flex flex-col items-center gap-2 border-t border-blue-500/20 pt-8">
+    <p class="flex items-center gap-2 text-gray-300 text-center">
+      <svg class="w-5 h-5 text-blue-400 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+      Built with <Link href="https://astro.build/" title="AstroJS" />,
+      <Link href="https://reactjs.org/" title="ReactJS" /> &
+      <Link href="https://tailwindcss.com" title="Tailwind" />
+    </p>
+    <p class="text-xs text-gray-400 mt-2">© {new Date().getFullYear()} David Anton. All rights reserved.</p>
+  </div>
+</footer>

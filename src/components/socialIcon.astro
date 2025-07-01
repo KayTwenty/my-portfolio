@@ -10,7 +10,7 @@ interface Props {
 const { title, Icon, link } = Astro.props;
 ---
 
-<a href={link} class="group" target="_blank">
+<a href={link} class="group" target="_blank" aria-label={title}>
   <div class="flex items-center space-x-2">
     <div class="flex justify-center sm:mb-0 sm:block">
       <div class="rounded-lg bg-gradient-to-tl from-blue-400 to-lightBlue-500/80 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-green-500/40 group-active:translate-y-1">

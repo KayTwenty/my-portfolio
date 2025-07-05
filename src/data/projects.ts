@@ -11,7 +11,7 @@ export const projects: Project[] = [
     title: "Oswald's Quest - Game",
     description: "An Open World 2D RPG game made with Java Swing libaries.",
     link: "https://github.com/KayTwenty/OswaldQuest",
-    stack: "Java, Swing",
+    stack: "Java, Swing, Tiled, Aseprite",
     image:
       "https://raw.githubusercontent.com/KayTwenty/OswaldQuest/main/.github/GitIcon.png",
   },
@@ -24,12 +24,12 @@ export const projects: Project[] = [
     image: "https://avatars.githubusercontent.com/u/127373412?s=200&v=4",
   },
   {
-    title: "LiveVHS - Web App",
+    title: "WhoAmEye – Modern Profile Card & Bio Link Platform",
     description:
-      "A livestreaming platform with zero censorship, powered by WebRTC and IPFS.",
-    link: "https://github.com/KayTwenty/LiveVHS",
-    stack: "NextJS, TypeScript, TailwindCSS, PrismaDB, WebRTC",
-    image: "https://raw.githubusercontent.com/KayTwenty/LiveVHS/main/public/logo.png",
+      "A modern profile card and bio link platform that allows users to create a personalized profile card with links to their social media, websites, and other online content.",
+    link: "https://github.com/KayTwenty/WhoAmEye",
+    stack: "Next.js, TypeScript, TailwindCSS, Supabase, WebAssembly",
+    image: "https://raw.githubusercontent.com/KayTwenty/WhoAmEye/0dbbc489eb56957f929e321e43130cb700c16ec2/public/logo.svg",
   },
   {
     title: "SpotVerse - Discord Bot",
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     description:
       "A 2D Top Down adventure game constructed with Unity2D and C#.",
     link: "https://midnightcavern.kaytwenty.com/",
-    stack: "Unity2D, C#",
+    stack: "Unity2D, C#, Tiled",
     image:
       "https://raw.githubusercontent.com/MidnightCavern/.github/main/assets/cavernlogo.png",
   },

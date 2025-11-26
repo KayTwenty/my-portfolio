@@ -1,0 +1,22 @@
+---
+import SocialIconWrapper from "./SocialIconWrapper";
+
+interface Props {
+  link: string;
+  Icon: any;
+  title: string;
+}
+
+const { title, Icon, link } = Astro.props;
+---
+
+<a href={link} class="group" target="_blank" aria-label={title}>
+  <div class="flex items-center space-x-2">
+    <div class="flex justify-center sm:mb-0 sm:block">
+      <div class="rounded-lg bg-linear-to-tl from-blue-400 to-lightBlue-500/80 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-green-500/40 group-active:translate-y-1">
+        <SocialIconWrapper client:visible Icon={Icon} className="transform text-gray-100 transition delay-100 duration-500 ease-out group-hover:scale-110"/>
+      </div>
+    </div>
+    <div class="hidden sm:block">{title}</div>
+  </div>
+</a>

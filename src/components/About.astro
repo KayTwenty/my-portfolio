@@ -1,0 +1,33 @@
+---
+import ProfileImage from './profileImage.astro';
+import Socials from './Socials.astro';
+---
+
+<div>
+  <div class='flex items-center space-x-6'>
+    <ProfileImage size='large' />
+    <div>
+      <h1 class='text-3xl font-medium text-gray-100/80 sm:text-4xl'>
+        David Anton ✌️
+      </h1>
+      <h2 class='align-middle text-lg leading-6 text-gray-100/50'>
+        Half-Stack Developer | Computer Retail Associate
+      </h2>
+    </div>
+  </div>
+  <article class='mt-9 text-xl text-gray-100/90 leading-relaxed'>
+    Hey! I'm <span id='age'></span> and I love building things with <span class='font-semibold text-blue-300/90'>NodeJS</span> & <span class='font-semibold text-blue-300/90'>TypeScript</span>. 
+    Whether it's crafting web apps, experimenting with indie game dev, or diving into 3D and resin printing, if it's creative or involves interesting tech, I'm all in.
+  </article>
+  <div class='mt-9'>
+    <Socials />
+  </div>
+</div>
+
+<script>
+  import { getYearDiffFromDate } from '../utils/getYearDiffFromDate';
+
+  const ageElement = document.getElementById('age');
+
+  ageElement!.innerText = getYearDiffFromDate('05/27/2005').toString();
+</script>

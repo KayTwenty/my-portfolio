@@ -1,0 +1,22 @@
+---
+import { Transition } from "./Transition";
+import ProfileImage from "./profileImage.astro";
+import Socials from "./Socials.astro";
+
+interface Props {
+  showNav?: boolean;
+  navRefId: string;
+}
+
+const { showNav, navRefId } = Astro.props;
+---
+
+<div class="pointer-events-none fixed inset-x-0 top-6 z-30 flex justify-center px-6">
+  <Transition show={showNav} refId={navRefId} client:only="react">
+    <nav class="pointer-events-auto inline-flex items-center gap-3 rounded-full bg-gray-900/80 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/30 px-4 py-2 transition-all duration-300 hover:border-white/20 hover:shadow-blue-500/20">
+      <ProfileImage size="small" />
+      <div class="h-4 w-px bg-white/10"></div>
+      <Socials />
+    </nav>
+  </Transition>
+</div>

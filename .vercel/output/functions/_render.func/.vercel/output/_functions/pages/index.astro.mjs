@@ -1,5 +1,5 @@
 /* empty css                                 */
-import { c as createComponent, a as createAstro, m as maybeRenderHead, b as addAttribute, r as renderTemplate, e as renderComponent, f as renderSlot, g as renderHead } from '../chunks/astro/server_CoZTpQad.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, b as addAttribute, r as renderTemplate, e as renderComponent, f as renderSlot, g as renderHead } from '../chunks/astro/server_B3mSX63G.mjs';
 import 'kleur/colors';
 import 'clsx';
 import { jsx } from 'react/jsx-runtime';
@@ -15,7 +15,8 @@ const $$ProfileImage = createComponent(($$result, $$props, $$slots) => {
 }, "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/profileImage.astro", void 0);
 
 function SocialIconWrapper({ Icon, className }) {
-  return /* @__PURE__ */ jsx(Icon, { className });
+  if (!Icon) return null;
+  return /* @__PURE__ */ jsx(Icon, { className, style: { width: "18px", height: "18px" } });
 }
 
 const $$Astro$6 = createAstro();
@@ -23,7 +24,7 @@ const $$SocialIcon = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$6, $$props, $$slots);
   Astro2.self = $$SocialIcon;
   const { title, Icon, link } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<a${addAttribute(link, "href")} class="group" target="_blank"${addAttribute(title, "aria-label")}> <div class="flex items-center space-x-2"> <div class="flex justify-center sm:mb-0 sm:block"> <div class="rounded-lg bg-gradient-to-tl from-blue-400 to-lightBlue-500/80 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-green-500/40 group-active:translate-y-1"> ${renderComponent($$result, "SocialIconWrapper", SocialIconWrapper, { "client:load": true, "Icon": Icon, "className": "w-[18px] transform text-gray-100 transition delay-100 duration-500 ease-out group-hover:scale-110", "client:component-hydration": "load", "client:component-path": "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/SocialIconWrapper", "client:component-export": "default" })} </div> </div> <div class="hidden sm:block">${title}</div> </div> </a>`;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(link, "href")} class="group" target="_blank"${addAttribute(title, "aria-label")}> <div class="flex items-center space-x-2"> <div class="flex justify-center sm:mb-0 sm:block"> <div class="rounded-lg bg-gradient-to-tl from-blue-400 to-lightBlue-500/80 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-green-500/40 group-active:translate-y-1"> ${renderComponent($$result, "SocialIconWrapper", SocialIconWrapper, { "client:visible": true, "Icon": Icon, "className": "transform text-gray-100 transition delay-100 duration-500 ease-out group-hover:scale-110", "client:component-hydration": "visible", "client:component-path": "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/SocialIconWrapper", "client:component-export": "default" })} </div> </div> <div class="hidden sm:block">${title}</div> </div> </a>`;
 }, "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/socialIcon.astro", void 0);
 
 const $$Socials = createComponent(($$result, $$props, $$slots) => {
@@ -35,7 +36,7 @@ const $$Navbar = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$5, $$props, $$slots);
   Astro2.self = $$Navbar;
   const { showNav, navRefId } = Astro2.props;
-  return renderTemplate`${maybeRenderHead()}<div class="pointer-events-none fixed top-6 z-30 w-full grid grid-cols-[1fr,min(640px,100%),1fr] px-4"> ${renderComponent($$result, "Transition", null, { "show": showNav, "refId": navRefId, "client:only": true, "client:component-hydration": "only", "client:component-path": "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/Transition", "client:component-export": "Transition" }, { "default": ($$result2) => renderTemplate` <nav class="pointer-events-auto col-start-2 w-full rounded-2xl bg-white/10 backdrop-blur-md border border-blue-400/20 shadow-surface-glass px-6 py-3 flex items-center justify-between"> <div class="flex items-center space-x-6"> ${renderComponent($$result2, "ProfileImage", $$ProfileImage, { "size": "small" })} </div> ${renderComponent($$result2, "Socials", $$Socials, {})} </nav> ` })} </div>`;
+  return renderTemplate`${maybeRenderHead()}<div class="pointer-events-none fixed top-6 z-30 w-full grid grid-cols-[1fr,min(640px,100%),1fr] px-4"> ${renderComponent($$result, "Transition", null, { "show": showNav, "refId": navRefId, "client:only": "react", "client:component-hydration": "only", "client:component-path": "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/Transition", "client:component-export": "Transition" }, { "default": ($$result2) => renderTemplate` <nav class="pointer-events-auto col-start-2 w-full rounded-2xl bg-white/10 backdrop-blur-md border border-blue-400/20 shadow-surface-glass px-6 py-3 flex items-center justify-between"> <div class="flex items-center space-x-6"> ${renderComponent($$result2, "ProfileImage", $$ProfileImage, { "size": "small" })} </div> ${renderComponent($$result2, "Socials", $$Socials, {})} </nav> ` })} </div>`;
 }, "C:/Users/David Anton/Documents/Code/Website Projects/Kay-Website/src/components/Navbar.astro", void 0);
 
 const $$Astro$4 = createAstro();

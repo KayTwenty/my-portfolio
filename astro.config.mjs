@@ -10,12 +10,5 @@ export default defineConfig({
   output: 'server',
   adapter: vercel({
     analytics: true,
-    imageService: true,
-    functionPerRoute: false,
   }),
-  vite: {
-    ssr: {
-      external: ['node:async_hooks']
-    }
-  }
 });

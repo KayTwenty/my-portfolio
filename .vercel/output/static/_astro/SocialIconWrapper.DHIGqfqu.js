@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime.CiDv_stu.js";import"./index.D-BB49yj.js";function o({Icon:t,className:r}){return t?e.jsx(t,{className:r,style:{width:"18px",height:"18px"}}):null}export{o as default};

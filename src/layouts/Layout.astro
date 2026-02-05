@@ -18,7 +18,7 @@ const { showNav, navRefId } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore the innovative projects and skills of David Anton (Kay/Anton), a full stack developer and systems administrator proficient in Perl, TypeScript, and web development. View my work!">
     <meta name="keywords" content="Full Stack Developer, Systems Administrator, Perl, TypeScript, Web Development, Indie Games, 3D Printing, Resin Printing, Innovative Projects">
-    <title>David Anton - Full Stack Developer</title>
+    <title id="page-title">Anton - Full Stack Developer & Systems Administrator</title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -70,5 +70,18 @@ const { showNav, navRefId } = Astro.props;
       </div>
       <GradientBackground client:only="react"/>
     </div>
+    <script>
+      // Set title based on domain
+      const hostname = window.location.hostname;
+      const titleElement = document.getElementById('page-title');
+      
+      if (hostname.includes('kaytwenty.com')) {
+        document.title = 'Kay - Full Stack Developer & Systems Administrator';
+      } else if (hostname.includes('antton.ca')) {
+        document.title = 'David Anton - Full Stack Developer & Systems Administrator';
+      } else {
+        document.title = 'Anton - Full Stack Developer & Systems Administrator';
+      }
+    </script>
   </body>
 </html>

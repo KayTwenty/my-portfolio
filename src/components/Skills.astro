@@ -1,6 +1,6 @@
 ---
 import Skill from "./Skill.astro";
-import { skills } from "../data/skills";
+import { skillCategories } from "../data/skills";
 ---
 
 <div class="mt-16">
@@ -9,10 +9,36 @@ import { skills } from "../data/skills";
     I have been involved in this endeavor for nearly <span id="experience"></span> years, 
     and it has been a journey filled with valuable lessons and personal growth.
   </p>
-  <div class="mt-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+  
+  <!-- Category Filter Tags -->
+  <div class="mt-9 grid grid-cols-2 sm:flex sm:flex-wrap gap-3" id="category-filters">
+    <button 
+      data-category="all" 
+      class="category-tag active px-4 py-2 rounded-lg bg-linear-to-r from-blue-400 to-lightBlue-500 text-white font-medium hover:from-blue-500 hover:to-lightBlue-600 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 text-center"
+    >
+      All
+    </button>
     {
-      skills.map((skill) => (
-        <Skill title={skill.title} icon={skill.icon} link={skill.link} />
+      skillCategories.map((category) => (
+        <button 
+          data-category={category.category} 
+          class="category-tag px-4 py-2 rounded-lg bg-white/5 text-gray-300 font-medium hover:bg-white/10 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 text-center"
+        >
+          {category.category}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- Skills Grid -->
+  <div class="mt-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2" id="skills-grid">
+    {
+      skillCategories.map((category) => (
+        category.skills.map((skill) => (
+          <div data-category={category.category}>
+            <Skill title={skill.title} icon={skill.icon} link={skill.link} />
+          </div>
+        ))
       ))
     }
   </div>
@@ -23,4 +49,32 @@ import { skills } from "../data/skills";
 
   const experience = document.getElementById("experience");
   experience!.innerText = getYearDiffFromDate("06/20/2019").toString();
+
+  // Category filtering
+  const categoryTags = document.querySelectorAll('.category-tag');
+  const skillItems = document.querySelectorAll('#skills-grid > div');
+
+  categoryTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const selectedCategory = tag.getAttribute('data-category');
+      
+      // Update active state
+      categoryTags.forEach(t => {
+        t.classList.remove('active', 'from-blue-400', 'to-lightBlue-500', 'bg-gradient-to-r', 'text-white');
+        t.classList.add('bg-white/5', 'text-gray-300');
+      });
+      tag.classList.add('active', 'bg-gradient-to-r', 'from-blue-400', 'to-lightBlue-500', 'text-white');
+      tag.classList.remove('bg-white/5', 'text-gray-300');
+
+      // Filter skills
+      skillItems.forEach(item => {
+        const htmlItem = item as HTMLElement;
+        if (selectedCategory === 'all' || item.getAttribute('data-category') === selectedCategory) {
+          htmlItem.style.display = 'block';
+        } else {
+          htmlItem.style.display = 'none';
+        }
+      });
+    });
+  });
 </script>

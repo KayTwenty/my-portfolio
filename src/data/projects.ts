@@ -8,7 +8,7 @@ interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Adrian Michalski Portfolio",
+    title: "Miski Media - Portfolio",
     description: "A portfolio website for a professional photographer that showcases his work dynamically using a custom made content management system (CMS).",
     link: "https://www.miskimedia.ca/",
     stack: "Next.js, TailwindCSS, TypeScript, Prisma, SQLite",
@@ -16,13 +16,15 @@ export const projects: Project[] = [
       "https://www.miskimedia.ca/logo.png",
   },
   {
-    title: "GG Central Website",
+    title: "GG Central - Website",
     description: "A website for a local gaming cafe located in Kitchener Ontario. Features booking, full event backend system, tounament management, and more.",
     link: "https://www.ggcentral.ca/",
     stack: "Next.js, TypeScript, TailwindCSS, Prisma, PostgreSQL, C++",
+    image:
+      "https://www.ggcentral.ca/logo.png",
   },
   {
-    title: "Mac Repair Man Website",
+    title: "Mac Repair Man - Website",
     description:
       "A website for an Apple technician repair shop located in Kitchener Ontario.",
     link: "https://www.macrepairman.ca/",
@@ -30,7 +32,7 @@ export const projects: Project[] = [
     image: "https://avatars.githubusercontent.com/u/127373412?s=200&v=4",
   },
   {
-    title: "WhoAmEye – Modern Profile Card & Bio Link Platform",
+    title: "WhoAmEye - Social Platform",
     description:
       "A modern profile card and bio link platform that allows users to create a personalized profile card with links to their social media, websites, and other online content.",
     link: "https://github.com/KayTwenty/WhoAmEye",

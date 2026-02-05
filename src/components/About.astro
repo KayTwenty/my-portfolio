@@ -8,15 +8,20 @@ import Socials from './Socials.astro';
     <ProfileImage size='large' />
     <div>
       <h1 class='text-3xl font-medium text-gray-100/80 sm:text-4xl'>
-        David Anton ✌️
+        <button 
+          id="name-toggle" 
+          class="cursor-default focus:outline-none"
+        >
+          David Anton
+        </button> <span id="name-emoji">✌️</span>
       </h1>
       <h2 class='align-middle text-lg leading-6 text-gray-100/50'>
-        Half-Stack Developer | Computer Retail Associate
+        Full Stack Developer | Systems Administrator
       </h2>
     </div>
   </div>
   <article class='mt-9 text-xl text-gray-100/90 leading-relaxed'>
-    Hey! I'm <span id='age'></span> and I love building things with <span class='font-semibold text-blue-300/90'>NodeJS</span> & <span class='font-semibold text-blue-300/90'>TypeScript</span>. 
+    Hey! I'm <span id='age'></span> and I love building things with <span class='font-semibold text-blue-300/90'>Perl</span> & <span class='font-semibold text-blue-300/90'>TypeScript</span>. 
     Whether it's crafting web apps, experimenting with indie game dev, or diving into 3D and resin printing, if it's creative or involves interesting tech, I'm all in.
   </article>
   <div class='mt-9'>
@@ -28,6 +33,34 @@ import Socials from './Socials.astro';
   import { getYearDiffFromDate } from '../utils/getYearDiffFromDate';
 
   const ageElement = document.getElementById('age');
-
   ageElement!.innerText = getYearDiffFromDate('05/27/2005').toString();
+
+  // Name cycling based on domain
+  const names = ['David Anton', 'Kay', 'Anton'];
+  const emojis = { 'David Anton': '✌️', 'Kay': '🌈', 'Anton': '✌️' };
+  const nameButton = document.getElementById('name-toggle') as HTMLButtonElement;
+  const nameEmoji = document.getElementById('name-emoji') as HTMLSpanElement;
+  
+  // Detect domain and set initial name
+  function getDefaultNameFromDomain(): string {
+    const hostname = window.location.hostname;
+    if (hostname.includes('kaytwenty.com')) return 'Kay';
+    if (hostname.includes('antton.ca')) return 'Anton';
+    return 'David Anton';
+  }
+
+  // Load saved preference or use domain detection
+  let currentName = localStorage.getItem('preferredName') || getDefaultNameFromDomain();
+  nameButton.innerText = currentName;
+  nameEmoji.innerText = emojis[currentName as keyof typeof emojis];
+
+  // Click to cycle through names
+  nameButton.addEventListener('click', () => {
+    const currentIndex = names.indexOf(currentName);
+    const nextIndex = (currentIndex + 1) % names.length;
+    currentName = names[nextIndex];
+    nameButton.innerText = currentName;
+    nameEmoji.innerText = emojis[currentName as keyof typeof emojis];
+    localStorage.setItem('preferredName', currentName);
+  });
 </script>

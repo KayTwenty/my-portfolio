@@ -1,0 +1,158 @@
+---
+import { readdirSync } from 'fs';
+import { join } from 'path';
+
+interface ShowcaseItem {
+  image: string;
+  title: string;
+  description?: string;
+}
+
+const showcaseDir = join(process.cwd(), 'public', 'showcase');
+let items: ShowcaseItem[] = [];
+
+try {
+  const files = readdirSync(showcaseDir);
+  items = files
+    .filter(file => /\.(jpg|jpeg|png)$/i.test(file))
+    .map(file => {
+      // Generate a title from filename
+      const title = file
+        .replace(/\.(jpg|jpeg|png)$/i, '')
+        .replace(/[-_]/g, ' ')
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      
+      return {
+        image: `/showcase/${file}`,
+        title: title
+      };
+    });
+} catch (error) {
+  console.warn('Could not read showcase directory:', error);
+}
+---
+
+{items.length > 0 && (
+<div class="mt-16" id="showcase">
+  <h2 class="text-2xl sm:text-3xl font-medium text-gray-100/80">Showcase</h2>
+  <p class="mt-7 text-xl text-gray-100/50">
+    A collection of my work on racks, computer builds, and hardware projects.
+  </p>
+
+  <div class="mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {items.map((item, index) => (
+      <button
+        class="group relative overflow-hidden rounded-xl bg-white/5 aspect-3/4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all duration-300 hover:bg-white/10"
+        data-image={item.image}
+        data-title={item.title}
+        data-description={item.description || ''}
+        style={`animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both; animation-delay: ${index * 0.1}s;`}
+      >
+        <img
+          src={item.image}
+          alt={item.title}
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-linear-to-t from-gray-900/90 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <h3 class="text-lg font-semibold text-white">{item.title}</h3>
+            {item.description && (
+              <p class="text-sm text-gray-300 mt-1">{item.description}</p>
+            )}
+          </div>
+        </div>
+      </button>
+    ))}
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm">
+    <button
+      id="close-lightbox"
+      class="absolute top-6 right-6 text-white text-4xl font-light hover:text-blue-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded w-12 h-12 flex items-center justify-center"
+      aria-label="Close lightbox"
+    >
+      ×
+    </button>
+    <div class="h-full flex flex-col items-center justify-center p-6 sm:p-12">
+      <img
+        id="lightbox-image"
+        src=""
+        alt=""
+        class="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
+      />
+      <div class="mt-6 text-center max-w-2xl">
+        <h3 id="lightbox-title" class="text-2xl font-semibold text-white"></h3>
+        <p id="lightbox-description" class="text-gray-300 mt-2"></p>
+      </div>
+    </div>
+  </div>
+</div>
+)}
+
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    const showcaseButtons = document.querySelectorAll('[data-image]');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDescription = document.getElementById('lightbox-description');
+    const closeLightbox = document.getElementById('close-lightbox');
+
+    if (showcaseButtons.length > 0) {
+      showcaseButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const image = button.getAttribute('data-image');
+          const title = button.getAttribute('data-title');
+          const description = button.getAttribute('data-description');
+
+          if (lightboxImage && lightboxTitle && lightboxDescription && lightbox) {
+            lightboxImage.src = image || '';
+            lightboxImage.alt = title || '';
+            lightboxTitle.textContent = title || '';
+            lightboxDescription.textContent = description || '';
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+    }
+
+    if (closeLightbox && lightbox) {
+      closeLightbox.addEventListener('click', () => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+          lightbox.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

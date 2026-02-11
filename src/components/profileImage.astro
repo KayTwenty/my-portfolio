@@ -7,7 +7,7 @@ const { size } = Astro.props;
 ---
 
 <a href="https://github.com/KayTwenty" aria-label="David Anton's GitHub profile">
-  <div class={`rounded-full cursor-pointer bg-linear-to-tl from-blue-400/60 to-lightBlue-500/60 shadow-lg ring-[5px] ring-blue-500/10 group transform transition ease-out hover:scale-105 hover:from-blue-400 hover:to-lightBlue-500 hover:shadow-lightBlue-500/25 active:translate-y-px relative ${size === "large" ? "sonar-container" : ""}`}>
+  <div class="rounded-full cursor-pointer bg-linear-to-tl from-blue-400/60 to-lightBlue-500/60 shadow-lg ring-[5px] ring-blue-500/10 group transform transition ease-out hover:scale-105 hover:from-blue-400 hover:to-lightBlue-500 hover:shadow-lightBlue-500/25 active:translate-y-px relative">
     <div class="rounded-full p-1">
       <img
         src="https://avatars.githubusercontent.com/kaytwenty"
@@ -17,35 +17,3 @@ const { size } = Astro.props;
     </div>
   </div>
 </a>
-
-<style>
-  .sonar-container::before,
-  .sonar-container::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid rgb(96, 165, 250);
-    transform: translate(-50%, -50%);
-    animation: sonar-ping 5s cubic-bezier(0, 0, 0.2, 1) infinite;
-    opacity: 0;
-  }
-
-  .sonar-container::after {
-    animation-delay: 2.5s;
-  }
-
-  @keyframes sonar-ping {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(2);
-      opacity: 0;
-    }
-  }
-</style>

@@ -1,7 +1,6 @@
 ---
 import { Transition } from "./Transition";
 import ProfileImage from "./profileImage.astro";
-import Socials from "./Socials.astro";
 
 interface Props {
   showNav?: boolean;
@@ -14,9 +13,9 @@ const { showNav, navRefId } = Astro.props;
 <div class="pointer-events-none fixed inset-x-0 top-0 z-30 flex justify-center px-6 transition-all duration-300" id="navbar-container">
   <nav class="pointer-events-auto inline-flex items-center gap-6 rounded-full bg-gray-900/80 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/30 px-6 py-3 transition-all duration-300 hover:border-white/20 hover:shadow-blue-500/20 mt-6" id="navbar">
     <ProfileImage size="small" />
+    <a href="#skills" class="text-gray-200 hover:text-blue-300 transition-colors text-lg font-medium nav-link">Skills</a>
+    <a href="#showcase" class="text-gray-200 hover:text-blue-300 transition-colors text-lg font-medium nav-link">Showcase</a>
     <span class="text-gray-500 cursor-not-allowed text-lg font-medium transition-all duration-300" title="Coming soon" id="blog-text">Blog</span>
-    <div class="h-4 w-px bg-white/10"></div>
-    <Socials />
   </nav>
 </div>
 
@@ -24,6 +23,7 @@ const { showNav, navRefId } = Astro.props;
   let lastScrollY = window.scrollY;
   const navbar = document.getElementById('navbar');
   const blogText = document.getElementById('blog-text');
+  const navLinks = document.querySelectorAll('.nav-link');
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
@@ -34,12 +34,20 @@ const { showNav, navRefId } = Astro.props;
       navbar?.classList.remove('py-3', 'px-6', 'gap-6', 'mt-6');
       blogText?.classList.add('text-sm');
       blogText?.classList.remove('text-lg');
+      navLinks.forEach(link => {
+        link.classList.add('text-sm');
+        link.classList.remove('text-lg');
+      });
     } else {
       // Return to normal size at top
       navbar?.classList.add('py-3', 'px-6', 'gap-6', 'mt-6');
       navbar?.classList.remove('py-2', 'px-4', 'gap-4', 'mt-3');
       blogText?.classList.add('text-lg');
       blogText?.classList.remove('text-sm');
+      navLinks.forEach(link => {
+        link.classList.add('text-lg');
+        link.classList.remove('text-sm');
+      });
     }
     
     lastScrollY = currentScrollY;

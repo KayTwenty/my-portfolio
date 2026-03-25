@@ -1,50 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Showcase from '../components/Showcase.astro';
 ---
 <Layout navRefId="about">
-    <div style="background: white; color: black; min-height: 100vh; padding: 60px 40px; font-family: Arial, sans-serif;">
-        <div style="max-width: 800px; margin: 0 auto; border: 3px solid black; padding: 60px;">
-            <!-- Logos -->
-            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; align-items: center;">
-                <img src="/csis.svg" alt="CSIS" style="height: 100px;">
-                <img src="/wrp.png" alt="Waterloo Region Police" style="height: 100px;">
-            </div>
-
-            <!-- Header -->
-            <div style="text-align: center; border-bottom: 2px solid black; padding-bottom: 20px; margin-bottom: 30px;">
-                <h1 style="font-size: 32px; font-weight: bold; margin: 0 0 10px 0;">NOTICE OF SEIZURE</h1>
-                <p style="font-size: 18px; margin: 0;">WEBSITE SEIZED</p>
-            </div>
-
-            <!-- Notice Body -->
-            <div style="line-height: 1.8; font-size: 16px;">
-                <p style="margin-bottom: 20px;">
-                    <strong>TO WHOM IT MAY CONCERN:</strong>
-                </p>
-
-                <p style="margin-bottom: 20px;">
-                    This domain and all associated web properties have been seized pursuant to an investigation conducted by the Canadian Security Intelligence Service (CSIS) and Waterloo Region Police Service.
-                </p>
-
-                <p style="margin-bottom: 20px;">
-                    This action has been taken in accordance with the <em>Criminal Code of Canada</em> and relevant federal statutes governing cybersecurity and national security matters.
-                </p>
-
-                <p style="margin-bottom: 20px;">
-                    All data, content, and materials hosted on this domain are now under the custody of Canadian law enforcement authorities.
-                </p>
-
-                <div style="background: #f0f0f0; border: 1px solid black; padding: 20px; margin: 30px 0;">
-                    <p style="margin: 0; text-align: center; font-weight: bold;">
-                        UNAUTHORIZED ACCESS TO THIS SITE IS PROHIBITED
-                    </p>
-                </div>
-
-                <div style="margin-top: 40px; border-top: 1px solid black; padding-top: 20px;">
-                    <p style="margin: 5px 0; font-size: 14px;"><strong>Case Reference:</strong> CSIS-WRP-2026-03-24-7719</p>
-                    <p style="margin: 5px 0; font-size: 14px;"><strong>Date of Seizure:</strong> March 24, 2026</p>
-                </div>
-            </div>
-        </div>
+    <div id="about">
+        <About />
     </div>
+    <Skills />
+    <Projects />
+    <Showcase />
 </Layout>

@@ -1,38 +1,32 @@
-# My Portfolio
+# Portfolio
+
 <img src="https://img.shields.io/github/last-commit/KayTwenty/my-portfolio?style=for-the-badge" alt="Commit"/> <img src="https://img.shields.io/github/license/KayTwenty/my-portfolio?style=for-the-badge" alt="License"/>
 
-Welcome to my portfolio website, where I showcase my projects and skills. This site uses [Astro](https://astro.build/), a modern static site generator, and TypeScript.
+My personal portfolio site built with Astro, React, and Tailwind. Shows off my projects, skills, and what I'm working on.
 
-## Features
-- ✨ Clean and responsive design.
-- 🚀 Fast-loading pages.
-- 💼 Showcase of my projects.
-- 📄 Detailed information about my skills and experience.
-- 📱 Mobile-friendly.
+## What's Inside
 
-## Getting Started
-To run this project locally, follow these steps:
+Clean responsive design with a dark/grunge aesthetic. Fast static site generation. Mobile-optimized with proper touch targets. Showcase section for hardware builds and projects. Dynamic skill filtering by category.
 
-1. **Clone the repository**:
-  ```bash
-  git clone https://github.com/KayTwenty/my-portfolio.git
-  ```
-2. **Navigate to the project directory**:
-  ```bash
-  cd my-portfolio
-  ```
-3. **Install dependencies**:
-  ```bash
-  npm install
-  ```
-4. **Run the development server**:
-  ```bash
-  npm run dev
-  ```
-The site should now be available at `http://localhost:3000`.
+## Running Locally
+
+```bash
+git clone https://github.com/KayTwenty/my-portfolio.git
+cd my-portfolio
+npm install
+npm run dev
+```
+
+Site runs at `http://localhost:4321`
+
+## Built With
+
+Astro 5, React 19, Tailwind 4, TypeScript, react-icons for SVG icons.
 
 ## Deployment
-You can deploy this portfolio on various hosting platforms. One common option is to use [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/).
+
+Currently deployed on Vercel using the static adapter. Also works with Netlify or any static hosting.
 
 ## License
-This open-source project is available under the [MIT License](https://github.com/KayTwenty/my-portfolio/blob/main/LICENSE).
+
+MIT License - do whatever you want with this.

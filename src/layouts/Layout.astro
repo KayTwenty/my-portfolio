@@ -16,9 +16,9 @@ const { showNav, navRefId } = Astro.props;
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore the innovative projects and skills of Anton (Kay), a full stack developer and systems administrator proficient in Perl, TypeScript, and web development. View my work!">
-    <meta name="keywords" content="Full Stack Developer, Systems Administrator, Perl, TypeScript, Web Development, Indie Games, 3D Printing, Resin Printing, Innovative Projects">
-    <title id="page-title">Anton - Full Stack Developer & Systems Administrator</title>
+    <meta name="description" content="Anton - Full Stack Developer and Systems Administrator specializing in Perl, TypeScript, and web development. Explore innovative projects, hardware builds, and creative tech solutions.">
+    <meta name="keywords" content="Anton, Full Stack Developer, Systems Administrator, Perl, TypeScript, Web Development, Indie Games, 3D Printing, Resin Printing, Hardware Projects, Server Builds">
+    <title>Anton - Full Stack Developer & Systems Administrator</title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -29,12 +29,12 @@ const { showNav, navRefId } = Astro.props;
 
     <!-- Twitter Card -->
     <meta name="twitter:title" content="Anton - Full Stack Developer & Systems Administrator">
-    <meta name="twitter:description" content="Explore the innovative projects and skills of Anton (Kay), a full stack developer and systems administrator proficient in Perl, TypeScript, and web development.">
+    <meta name="twitter:description" content="Anton - Full Stack Developer and Systems Administrator specializing in Perl, TypeScript, and web development. Explore innovative projects, hardware builds, and creative tech solutions.">
     <meta name="twitter:image" content="/icon.jpg">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Anton - Full Stack Developer & Systems Administrator">
-    <meta property="og:description" content="Explore the innovative projects and skills of Anton (Kay), a full stack developer and systems administrator proficient in Perl, TypeScript, and web development.">
+    <meta property="og:description" content="Anton - Full Stack Developer and Systems Administrator specializing in Perl, TypeScript, and web development. Explore innovative projects, hardware builds, and creative tech solutions.">
     <meta property="og:image" content="/icon.jpg">
     <meta property="og:url" content="https://kaytwenty.com">
     <meta property="og:url" content="https://antton.ca">
@@ -45,43 +45,31 @@ const { showNav, navRefId } = Astro.props;
         {
           "@context": "http://schema.org",
           "@type": "Person",
-          "name": "David Anton",
-          "alternateName": ["Kay", "Anton"],
+          "name": "Anton",
           "jobTitle": "Full Stack Developer & Systems Administrator",
+          "description": "Full Stack Developer and Systems Administrator specializing in Perl, TypeScript, web development, and hardware projects.",
           "email": "davidanton037@gmail.com",
-          "url": ["https://kaytwenty.com", "https://antton.ca"]
+          "url": ["https://kaytwenty.com", "https://antton.ca"],
+          "sameAs": ["https://github.com/kaytwenty"]
         }
     </script>
   </head>
   <body>
-    <div id="home" class="bg-gray-900 antialiased selection:bg-blue-500/90 selection:text-white min-h-screen">
-      <svg class="pointer-events-none fixed isolate z-50 opacity-70 mix-blend-soft-light" width="100%" height="100%">
+    <div id="home" class="bg-black antialiased selection:bg-red-600 selection:text-white min-h-screen">
+      <svg class="pointer-events-none fixed isolate z-50 opacity-40 mix-blend-overlay" width="100%" height="100%">
         <filter id="filterv2">
-          <feTurbulence type="fractalNoise" baseFrequency="0.90" numOctaves="4" stitchTiles="stitch"></feTurbulence>
+          <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="5" stitchTiles="stitch"></feTurbulence>
         </filter>
         <rect width="100%" height="100%" filter="url(#filterv2)"></rect>
       </svg>
-      <div class="mx-auto w-full max-w-3xl px-4">
+      <div class="mx-auto w-full max-w-3xl px-4 sm:px-6">
         <Navbar showNav={showNav} navRefId={navRefId} />
-        <main role="main" class="relative z-10 pt-36 sm:pt-48 text-lg text-rose-100/90 space-y-16">
+        <main role="main" class="relative z-10 pt-24 sm:pt-36 md:pt-48 text-base sm:text-lg text-gray-100 space-y-12 sm:space-y-16">
           <slot />
           <Footer />
         </main>
       </div>
       <GradientBackground client:only="react"/>
     </div>
-    <script>
-      // Set title based on domain
-      const hostname = window.location.hostname;
-      const titleElement = document.getElementById('page-title');
-      
-      if (hostname.includes('kaytwenty.com')) {
-        document.title = 'Kay - Full Stack Developer & Systems Administrator';
-      } else if (hostname.includes('antton.ca')) {
-        document.title = 'David Anton - Full Stack Developer & Systems Administrator';
-      } else {
-        document.title = 'Anton - Full Stack Developer & Systems Administrator';
-      }
-    </script>
   </body>
 </html>

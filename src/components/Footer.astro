@@ -2,21 +2,21 @@
 import Link from "./Link.astro";
 ---
 
-<footer class="mt-32 pb-20 text-base w-full flex justify-center">
-  <div class="max-w-3xl w-full flex flex-col items-center gap-4 border-t border-blue-400/30 pt-12">
-    <div class="flex items-center gap-2 text-gray-200/90 text-center">
-      <svg class="w-4 h-4 text-blue-400/80" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<footer class="mt-16 sm:mt-24 md:mt-32 pb-12 sm:pb-16 md:pb-20 text-sm sm:text-base w-full flex justify-center">
+  <div class="max-w-3xl w-full flex flex-col items-center gap-3 sm:gap-4 border-t-2 sm:border-t-4 border-white/30 pt-8 sm:pt-12 px-4">
+    <div class="flex items-center gap-2 text-gray-300 text-center uppercase tracking-wider">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
       </svg>
-      <span class="text-sm">Built with</span>
+      <span class="text-xs sm:text-sm font-bold">Built with</span>
     </div>
-    <div class="flex items-center gap-3 text-gray-300/80 flex-wrap justify-center">
+    <div class="flex items-center gap-2 sm:gap-3 text-gray-400 flex-wrap justify-center uppercase tracking-wider font-bold text-xs sm:text-sm">
       <Link href="https://astro.build/" title="AstroJS" />
-      <span class="text-blue-400/50">•</span>
+      <span class="text-white/50">•</span>
       <Link href="https://reactjs.org/" title="ReactJS" />
-      <span class="text-blue-400/50">•</span>
+      <span class="text-white/50">•</span>
       <Link href="https://tailwindcss.com" title="Tailwind" />
     </div>
-    <p class="text-xs text-gray-400/70 mt-3">© {new Date().getFullYear()} Anton. All rights reserved.</p>
+    <p class="text-xs text-gray-500 mt-2 sm:mt-3 uppercase tracking-widest text-center">© {new Date().getFullYear()} Anton. All rights reserved.</p>
   </div>
 </footer>

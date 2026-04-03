@@ -2,4 +2,38 @@
 
 html {
     scroll-behavior: smooth;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+}
+
+body {
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Better font rendering on mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent text size adjustment on mobile */
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Improve tap target size on mobile */
+@media (max-width: 640px) {
+    button,
+    a {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Prevent zoom on input focus on iOS */
+@media screen and (max-width: 640px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Smooth scrolling for all elements */
+* {
+    -webkit-overflow-scrolling: touch;
 }

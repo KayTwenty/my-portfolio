@@ -3,26 +3,26 @@ import Skill from "./Skill.astro";
 import { skillCategories } from "../data/skills";
 ---
 
-<div class="mt-16" id="skills">
-  <h2 class="text-2xl sm:text-3xl font-medium text-gray-100/80">Skills</h2>
-  <p class="mt-7 text-xl text-gray-100/50">
+<div class="mt-12 sm:mt-16" id="skills">
+  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-widest border-b-4 border-white/30 pb-2 sm:pb-3">Skills</h2>
+  <p class="mt-5 sm:mt-7 text-lg sm:text-xl text-gray-300">
     I have been involved in this endeavor for nearly <span id="experience"></span> years, 
     and it has been a journey filled with valuable lessons and personal growth.
   </p>
   
   <!-- Category Filter Tags -->
-  <div class="mt-9 grid grid-cols-2 sm:flex sm:flex-wrap gap-3" id="category-filters">
+  <div class="mt-6 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3" id="category-filters">
     <button 
       data-category="all" 
-      class="category-tag active px-4 py-2 rounded-lg bg-linear-to-r from-blue-400 to-lightBlue-500 text-white font-medium hover:from-blue-500 hover:to-lightBlue-600 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 text-center"
-    >
+      class="category-tag active px-3 sm:px-4 py-2.5 sm:py-2 bg-white text-black font-bold hover:bg-gray-200 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white uppercase tracking-wider text-center border-2 border-white text-xs sm:text-sm min-h-11"
+   >
       All
     </button>
     {
       skillCategories.map((category) => (
         <button 
           data-category={category.category} 
-          class="category-tag px-4 py-2 rounded-lg bg-white/5 text-gray-300 font-medium hover:bg-white/10 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 text-center"
+          class="category-tag px-3 sm:px-4 py-2.5 sm:py-2 bg-black border-2 border-white/40 text-gray-300 font-bold hover:bg-white/10 hover:border-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white uppercase tracking-wider text-center text-xs sm:text-sm min-h-11"
         >
           {category.category}
         </button>
@@ -31,7 +31,7 @@ import { skillCategories } from "../data/skills";
   </div>
 
   <!-- Skills Grid -->
-  <div class="mt-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2" id="skills-grid">
+  <div class="mt-6 sm:mt-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3" id="skills-grid">
     {
       skillCategories.map((category) => (
         category.skills.map((skill) => (
@@ -60,11 +60,11 @@ import { skillCategories } from "../data/skills";
       
       // Update active state
       categoryTags.forEach(t => {
-        t.classList.remove('active', 'from-blue-400', 'to-lightBlue-500', 'bg-gradient-to-r', 'text-white');
-        t.classList.add('bg-white/5', 'text-gray-300');
+        t.classList.remove('active', 'bg-white', 'text-black', 'border-white');
+        t.classList.add('bg-black', 'text-gray-300', 'border-white/40');
       });
-      tag.classList.add('active', 'bg-gradient-to-r', 'from-blue-400', 'to-lightBlue-500', 'text-white');
-      tag.classList.remove('bg-white/5', 'text-gray-300');
+      tag.classList.add('active', 'bg-white', 'text-black', 'border-white');
+      tag.classList.remove('bg-black', 'text-gray-300', 'border-white/40');
 
       // Filter skills
       skillItems.forEach(item => {

@@ -29,9 +29,9 @@ export const skillCategories: SkillCategory[] = [
         link: "https://www.python.org/",
       },
       {
-        title: "Java",
-        icon: "https://s2.svgbox.net/files.svg?ic=java",
-        link: "https://www.java.com/en/",
+        title: "Perl",
+        icon: "https://s2.svgbox.net/files.svg?ic=perl",
+        link: "https://www.perl.org/",
       },
       {
         title: "C#",

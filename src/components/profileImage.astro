@@ -6,13 +6,13 @@ interface Props {
 const { size } = Astro.props;
 ---
 
-<a href="https://github.com/KayTwenty" aria-label="David Anton's GitHub profile">
-  <div class="rounded-full cursor-pointer bg-linear-to-tl from-blue-400/60 to-lightBlue-500/60 shadow-lg ring-[5px] ring-blue-500/10 group transform transition ease-out hover:scale-105 hover:from-blue-400 hover:to-lightBlue-500 hover:shadow-lightBlue-500/25 active:translate-y-px relative">
-    <div class="rounded-full p-1">
+<a href="https://github.com/KayTwenty" aria-label="David Anton's GitHub profile" class="block">
+  <div class="rounded-none cursor-pointer bg-black shadow-2xl ring-2 sm:ring-4 ring-white/30 group transform transition ease-out hover:scale-105 hover:ring-white/60 hover:shadow-red-900/40 active:translate-y-px relative border-2 border-white/20">
+    <div class="p-0.5 sm:p-1">
       <img
         src="https://avatars.githubusercontent.com/kaytwenty"
         alt="Portrait of David Anton"
-        class={`rounded-full ${size === "large" ? "w-16" : "w-10"}`}
+        class={`grayscale contrast-125 ${size === "large" ? "w-14 sm:w-16 md:w-20" : "w-8 sm:w-10"}`}
       />
     </div>
   </div>

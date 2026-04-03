@@ -1,28 +1,25 @@
 ---
 import ProfileImage from './profileImage.astro';
 import Socials from './Socials.astro';
+import SocialIconWrapper from './SocialIconWrapper';
+import { FaSkull } from 'react-icons/fa';
 ---
 
 <div>
-  <div class='flex items-center space-x-6'>
+  <div class='flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left'>
     <ProfileImage size='large' />
-    <div>
-      <h1 class='text-3xl font-medium text-gray-100/80 sm:text-4xl'>
-        <button 
-          id="name-toggle" 
-          class="cursor-default focus:outline-none"
-        >
-          David Anton
-        </button> <span id="name-emoji">✌️</span>
+    <div class='flex-1'>
+      <h1 class='text-2xl sm:text-3xl md:text-4xl font-bold text-white uppercase tracking-wide flex items-center justify-center sm:justify-start gap-2 sm:gap-3 flex-wrap'>
+        Anton <span class="text-xl sm:text-2xl md:text-3xl"><SocialIconWrapper client:visible Icon={FaSkull} className="text-white inline-block"/></span>
       </h1>
-      <h2 class='align-middle text-lg leading-6 text-gray-100/50'>
-        Full Stack Developer | Systems Administrator
+      <h2 class='align-middle text-base sm:text-lg leading-6 text-gray-400 uppercase tracking-wider mt-2'>
+        Network Engineer | DJ
       </h2>
     </div>
   </div>
-  <article class='mt-9 text-xl text-gray-100/90 leading-relaxed'>
-    Hey! I'm <span id='age'></span> and I love building things with <span class='font-semibold text-blue-300/90'>Perl</span> & <span class='font-semibold text-blue-300/90'>TypeScript</span>. 
-    Whether it's crafting web apps, experimenting with indie game dev, or diving into 3D and resin printing, if it's creative or involves interesting tech, I'm all in.
+  <article class='mt-6 sm:mt-9 text-lg sm:text-xl text-gray-200 leading-relaxed'>
+    I'm <span id='age'></span>, building stuff with <strong class='font-bold text-red-400 border-b-2 border-red-400/60'>Perl</strong> & <strong class='font-bold text-blue-400 border-b-2 border-blue-400/60'>TypeScript</strong>. 
+    Coding web apps, spinning <strong class='font-bold text-pink-400 border-b-2 border-pink-400/60'>hyperpop</strong> & <strong class='font-bold text-purple-400 border-b-2 border-purple-400/60'>dubstep</strong> sets at underground spots, and making things with 3D printing. If it's creative or breaks the mold, I'm into it.
   </article>
   <div class='mt-9'>
     <Socials />
@@ -34,33 +31,4 @@ import Socials from './Socials.astro';
 
   const ageElement = document.getElementById('age');
   ageElement!.innerText = getYearDiffFromDate('05/27/2005').toString();
-
-  // Name cycling based on domain
-  const names = ['David Anton', 'Kay', 'Anton'];
-  const emojis = { 'David Anton': '✌️', 'Kay': '🌈', 'Anton': '✌️' };
-  const nameButton = document.getElementById('name-toggle') as HTMLButtonElement;
-  const nameEmoji = document.getElementById('name-emoji') as HTMLSpanElement;
-  
-  // Detect domain and set initial name
-  function getDefaultNameFromDomain(): string {
-    const hostname = window.location.hostname;
-    if (hostname.includes('kaytwenty.com')) return 'Kay';
-    if (hostname.includes('antton.ca')) return 'David Anton';
-    return 'Anton';
-  }
-
-  // Load saved preference or use domain detection
-  let currentName = localStorage.getItem('preferredName') || getDefaultNameFromDomain();
-  nameButton.innerText = currentName;
-  nameEmoji.innerText = emojis[currentName as keyof typeof emojis];
-
-  // Click to cycle through names
-  nameButton.addEventListener('click', () => {
-    const currentIndex = names.indexOf(currentName);
-    const nextIndex = (currentIndex + 1) % names.length;
-    currentName = names[nextIndex];
-    nameButton.innerText = currentName;
-    nameEmoji.innerText = emojis[currentName as keyof typeof emojis];
-    localStorage.setItem('preferredName', currentName);
-  });
 </script>

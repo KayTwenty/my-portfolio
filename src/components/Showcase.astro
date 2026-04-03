@@ -1,6 +1,7 @@
 ---
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import { showcaseDescriptions } from '../data/showcase';
 
 interface ShowcaseItem {
   image: string;
@@ -16,9 +17,11 @@ try {
   items = files
     .filter(file => /\.(jpg|jpeg|png)$/i.test(file))
     .map(file => {
+      // Get filename without extension for description lookup
+      const fileKey = file.replace(/\.(jpg|jpeg|png)$/i, '');
+      
       // Generate a title from filename
-      const title = file
-        .replace(/\.(jpg|jpeg|png)$/i, '')
+      const title = fileKey
         .replace(/[-_]/g, ' ')
         .split(' ')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -26,7 +29,8 @@ try {
       
       return {
         image: `/showcase/${file}`,
-        title: title
+        title: title,
+        description: showcaseDescriptions[fileKey] || ''
       };
     });
 } catch (error) {
@@ -35,16 +39,16 @@ try {
 ---
 
 {items.length > 0 && (
-<div class="mt-16" id="showcase">
-  <h2 class="text-2xl sm:text-3xl font-medium text-gray-100/80">Showcase</h2>
-  <p class="mt-7 text-xl text-gray-100/50">
+<div class="mt-12 sm:mt-16" id="showcase">
+  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-widest border-b-4 border-white/30 pb-2 sm:pb-3">Showcase</h2>
+  <p class="mt-5 sm:mt-7 text-lg sm:text-xl text-gray-300">
     A collection of my work on racks, computer builds, and hardware projects.
   </p>
 
-  <div class="mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div class="mt-6 sm:mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
     {items.map((item, index) => (
       <button
-        class="group relative overflow-hidden rounded-xl bg-white/5 aspect-3/4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-all duration-300 hover:bg-white/10"
+        class="group relative overflow-hidden bg-black border-4 border-white/30 aspect-3/4 focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-300 hover:border-white"
         data-image={item.image}
         data-title={item.title}
         data-description={item.description || ''}
@@ -53,11 +57,11 @@ try {
         <img
           src={item.image}
           alt={item.title}
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 contrast-125"
         />
-        <div class="absolute inset-0 bg-linear-to-t from-gray-900/90 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div class="absolute bottom-0 left-0 right-0 p-4">
-            <h3 class="text-lg font-semibold text-white">{item.title}</h3>
+        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute bottom-0 left-0 right-0 p-4 border-t-2 border-white/40">
+            <h3 class="text-lg font-bold text-white uppercase tracking-wide">{item.title}</h3>
             {item.description && (
               <p class="text-sm text-gray-300 mt-1">{item.description}</p>
             )}
@@ -68,24 +72,26 @@ try {
   </div>
 
   <!-- Lightbox Modal -->
-  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm">
+  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black">
     <button
       id="close-lightbox"
-      class="absolute top-6 right-6 text-white text-4xl font-light hover:text-blue-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded w-12 h-12 flex items-center justify-center"
+      class="absolute top-3 right-3 sm:top-6 sm:right-6 text-white text-4xl sm:text-5xl font-light hover:text-red-500 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-white z-10"
       aria-label="Close lightbox"
     >
       ×
     </button>
-    <div class="h-full flex flex-col items-center justify-center p-6 sm:p-12">
-      <img
-        id="lightbox-image"
-        src=""
-        alt=""
-        class="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
-      />
-      <div class="mt-6 text-center max-w-2xl">
-        <h3 id="lightbox-title" class="text-2xl font-semibold text-white"></h3>
-        <p id="lightbox-description" class="text-gray-300 mt-2"></p>
+    <div class="h-full flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-8 p-4 sm:p-6 lg:p-12">
+      <div class="shrink-0 max-w-full lg:max-w-[60%] flex items-center justify-center">
+        <img
+          id="lightbox-image"
+          src=""
+          alt=""
+          class="max-w-full max-h-[50vh] sm:max-h-[70vh] lg:max-h-[85vh] object-contain border-2 sm:border-4 border-white/40 contrast-125"
+        />
+      </div>
+      <div class="flex-1 max-w-full lg:max-w-md text-left lg:border-l-4 lg:border-white/30 lg:pl-8 px-4 sm:px-0">
+        <h3 id="lightbox-title" class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-wide mb-3 sm:mb-4"></h3>
+        <p id="lightbox-description" class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed"></p>
       </div>
     </div>
   </div>

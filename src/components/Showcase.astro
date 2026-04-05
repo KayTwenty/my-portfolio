@@ -15,8 +15,8 @@ let items: ShowcaseItem[] = [];
 try {
   const files = readdirSync(showcaseDir);
   items = files
-    .filter(file => /\.(jpg|jpeg|png)$/i.test(file))
-    .map(file => {
+    .filter((file: string) => /\.(jpg|jpeg|png)$/i.test(file))
+    .map((file: string) => {
       // Get filename without extension for description lookup
       const fileKey = file.replace(/\.(jpg|jpeg|png)$/i, '');
       
@@ -24,7 +24,7 @@ try {
       const title = fileKey
         .replace(/[-_]/g, ' ')
         .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
       
       return {
@@ -80,6 +80,25 @@ try {
     >
       ×
     </button>
+    
+    <!-- Previous Button -->
+    <button
+      id="prev-image"
+      class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-5xl font-light hover:text-white/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-white bg-black/50 backdrop-blur-sm z-10"
+      aria-label="Previous image"
+    >
+      ‹
+    </button>
+    
+    <!-- Next Button -->
+    <button
+      id="next-image"
+      class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-5xl font-light hover:text-white/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-white bg-black/50 backdrop-blur-sm z-10"
+      aria-label="Next image"
+    >
+      ›
+    </button>
+    
     <div class="h-full flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-8 p-4 sm:p-6 lg:p-12">
       <div class="shrink-0 max-w-full lg:max-w-[60%] flex items-center justify-center">
         <img
@@ -106,47 +125,93 @@ try {
     const lightboxTitle = document.getElementById('lightbox-title');
     const lightboxDescription = document.getElementById('lightbox-description');
     const closeLightbox = document.getElementById('close-lightbox');
+    const prevButton = document.getElementById('prev-image');
+    const nextButton = document.getElementById('next-image');
+    const navbar = document.getElementById('navbar-container');
+    
+    let currentIndex = 0;
+    const images = Array.from(showcaseButtons).map(button => ({
+      image: button.getAttribute('data-image'),
+      title: button.getAttribute('data-title'),
+      description: button.getAttribute('data-description')
+    }));
+
+    function showImage(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      
+      currentIndex = index;
+      const current = images[currentIndex];
+      
+      if (lightboxImage && lightboxTitle && lightboxDescription) {
+        lightboxImage.src = current.image || '';
+        lightboxImage.alt = current.title || '';
+        lightboxTitle.textContent = current.title || '';
+        lightboxDescription.textContent = current.description || '';
+      }
+    }
+
+    function openLightbox(index) {
+      if (lightbox && navbar) {
+        showImage(index);
+        lightbox.classList.remove('hidden');
+        navbar.classList.add('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightboxFunc() {
+      if (lightbox && navbar) {
+        lightbox.classList.add('hidden');
+        navbar.classList.remove('hidden');
+        document.body.style.overflow = '';
+      }
+    }
 
     if (showcaseButtons.length > 0) {
-      showcaseButtons.forEach(button => {
+      showcaseButtons.forEach((button, index) => {
         button.addEventListener('click', () => {
-          const image = button.getAttribute('data-image');
-          const title = button.getAttribute('data-title');
-          const description = button.getAttribute('data-description');
-
-          if (lightboxImage && lightboxTitle && lightboxDescription && lightbox) {
-            lightboxImage.src = image || '';
-            lightboxImage.alt = title || '';
-            lightboxTitle.textContent = title || '';
-            lightboxDescription.textContent = description || '';
-            lightbox.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-          }
+          openLightbox(index);
         });
       });
     }
 
-    if (closeLightbox && lightbox) {
-      closeLightbox.addEventListener('click', () => {
-        lightbox.classList.add('hidden');
-        document.body.style.overflow = '';
+    if (prevButton) {
+      prevButton.addEventListener('click', () => {
+        showImage(currentIndex - 1);
       });
+    }
 
+    if (nextButton) {
+      nextButton.addEventListener('click', () => {
+        showImage(currentIndex + 1);
+      });
+    }
+
+    if (closeLightbox) {
+      closeLightbox.addEventListener('click', closeLightboxFunc);
+    }
+
+    if (lightbox) {
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
-          lightbox.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      });
-
-      // Close on Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
-          lightbox.classList.add('hidden');
-          document.body.style.overflow = '';
+          closeLightboxFunc();
         }
       });
     }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox?.classList.contains('hidden')) {
+        if (e.key === 'Escape') {
+          closeLightboxFunc();
+        } else if (e.key === 'ArrowLeft') {
+          showImage(currentIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          showImage(currentIndex + 1);
+        }
+      }
+    });
   }
 </script>
 

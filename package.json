@@ -23,5 +23,8 @@
     "react-icons": "^5.5.0",
     "react-use": "^17.6.0",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2"
   }
 }

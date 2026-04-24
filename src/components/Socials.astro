@@ -1,7 +1,7 @@
 ---
 import SocialIcon from "./socialIcon.astro";
 import SocialIconWrapper from "./SocialIconWrapper";
-import { FaGithub, FaLinkedin, FaEnvelope, FaMixcloud, FaSoundcloud, FaDiscord } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaDiscord } from "react-icons/fa";
 ---
 
 <div class="flex flex-wrap gap-3 sm:gap-4 text-sm sm:text-base font-medium leading-none text-gray-300 justify-center sm:justify-start">
@@ -9,16 +9,6 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaMixcloud, FaSoundcloud, FaDiscord }
     Icon={FaGithub}
     title="GitHub"
     link="https://github.com/KayTwenty"
-  />
-  <SocialIcon
-    Icon={FaMixcloud}
-    title="Mixcloud"
-    link="https://www.mixcloud.com/kaytwenty/"
-  />
-  <SocialIcon
-    Icon={FaSoundcloud}
-    title="SoundCloud"
-    link="https://soundcloud.com/kaytwentylive"
   />
   <SocialIcon
     Icon={FaDiscord}
@@ -109,10 +99,25 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaMixcloud, FaSoundcloud, FaDiscord }
   let correctAnswer = 0;
 
   function generateMathProblem() {
-    const num1 = Math.floor(Math.random() * 20) + 1;
-    const num2 = Math.floor(Math.random() * 20) + 1;
-    correctAnswer = num1 + num2;
-    mathQuestion!.textContent = `${num1} + ${num2} = ?`;
+    const operations = ['×', '÷'];
+    const operation = operations[Math.floor(Math.random() * operations.length)];
+    
+    let num1: number, num2: number;
+    
+    if (operation === '÷') {
+      // For division, ensure clean division with no remainders
+      num2 = Math.floor(Math.random() * 10) + 2; // divisor: 2-11
+      const quotient = Math.floor(Math.random() * 10) + 2; // result: 2-11
+      num1 = num2 * quotient; // dividend
+      correctAnswer = quotient;
+    } else {
+      // Multiplication with reasonable numbers
+      num1 = Math.floor(Math.random() * 12) + 2; // 2-13
+      num2 = Math.floor(Math.random() * 12) + 2; // 2-13
+      correctAnswer = num1 * num2;
+    }
+    
+    mathQuestion!.textContent = `${num1} ${operation} ${num2} = ?`;
   }
 
   emailButton?.addEventListener('click', () => {

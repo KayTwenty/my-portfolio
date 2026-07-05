@@ -2,6 +2,7 @@
 import { readdirSync } from 'fs';
 import { join } from 'path';
 import { showcaseDescriptions } from '../data/showcase';
+import Footer from './Footer.astro';
 
 interface ShowcaseItem {
   image: string;
@@ -19,14 +20,14 @@ try {
     .map((file: string) => {
       // Get filename without extension for description lookup
       const fileKey = file.replace(/\.(jpg|jpeg|png)$/i, '');
-      
+
       // Generate a title from filename
       const title = fileKey
         .replace(/[-_]/g, ' ')
         .split(' ')
         .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-      
+
       return {
         image: `/showcase/${file}`,
         title: title,
@@ -38,84 +39,108 @@ try {
 }
 ---
 
-{items.length > 0 && (
-<div class="mt-12 sm:mt-16" id="showcase">
-  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-widest border-b-4 border-white/30 pb-2 sm:pb-3">Showcase</h2>
-  <p class="mt-5 sm:mt-7 text-lg sm:text-xl text-gray-300">
-    A collection of my work on racks, computer builds, and hardware projects.
-  </p>
+<section id="showcase" class="snap-start min-h-dvh w-full relative flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-28 py-24">
+  <span class="section-index" aria-hidden="true" data-parallax="0.45">04</span>
 
-  <div class="mt-6 sm:mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-    {items.map((item, index) => (
-      <button
-        class="group relative overflow-hidden bg-black border-4 border-white/30 aspect-3/4 focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-300 hover:border-white"
-        data-image={item.image}
-        data-title={item.title}
-        data-description={item.description || ''}
-        style={`animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both; animation-delay: ${index * 0.1}s;`}
-      >
-        <img
-          src={item.image}
-          alt={item.title}
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 contrast-125"
-        />
-        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div class="absolute bottom-0 left-0 right-0 p-4 border-t-2 border-white/40">
-            <h3 class="text-lg font-bold text-white uppercase tracking-wide">{item.title}</h3>
-            {item.description && (
-              <p class="text-sm text-gray-300 mt-1">{item.description}</p>
-            )}
+  <div class="relative z-10 max-w-6xl w-full">
+    <p class="font-mono text-accent-dim text-xs sm:text-sm tracking-[0.3em] uppercase mb-4" data-reveal data-reveal-delay="0">// 04</p>
+    <h2 class="glitch-text font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-widest border-b-4 border-white/30 pb-2 sm:pb-3" data-text="Showcase" data-reveal data-reveal-delay="80">Showcase</h2>
+
+    {items.length > 0 && (
+      <div>
+        <p class="mt-5 sm:mt-7 text-lg sm:text-xl text-gray-300">
+          A collection of my work on racks, computer builds, and hardware projects.
+        </p>
+
+        <div class="mt-6 sm:mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {items.map((item, index) => (
+            <button
+              class="hud-corners group relative overflow-hidden bg-black border-4 border-white/30 aspect-3/4 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all duration-300 hover:border-accent/60"
+              data-image={item.image}
+              data-title={item.title}
+              data-description={item.description || ''}
+              style={`animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both; animation-delay: ${index * 0.1}s;`}
+            >
+              <span class="hud-scanline"></span>
+              <img
+                src={item.image}
+                alt={item.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 contrast-125"
+              />
+              <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="absolute bottom-0 left-0 right-0 p-4 border-t-2 border-accent/40">
+                  <h3 class="font-display text-lg font-bold text-white uppercase tracking-wide">{item.title}</h3>
+                  {item.description && (
+                    <p class="text-sm text-gray-300 mt-1">{item.description}</p>
+                  )}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black font-mono">
+          <!-- HUD index readout -->
+          <div id="lightbox-index" class="absolute top-3 left-3 sm:top-6 sm:left-6 z-10 text-accent-dim text-[10px] sm:text-xs tracking-[0.2em] uppercase"></div>
+
+          <button
+            id="close-lightbox"
+            class="absolute top-3 right-3 sm:top-6 sm:right-6 text-white text-4xl sm:text-5xl font-light hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-accent z-10"
+            aria-label="Close lightbox"
+          >
+            ×
+          </button>
+
+          <!-- Previous Button -->
+          <button
+            id="prev-image"
+            class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-5xl font-light hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-accent bg-black/50 backdrop-blur-sm z-10"
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+
+          <!-- Next Button -->
+          <button
+            id="next-image"
+            class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-5xl font-light hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-accent bg-black/50 backdrop-blur-sm z-10"
+            aria-label="Next image"
+          >
+            ›
+          </button>
+
+          <div class="h-full flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-8 p-4 sm:p-6 lg:p-12">
+            <div class="shrink-0 max-w-full lg:max-w-[60%] flex items-center justify-center">
+              <div class="hud-corners relative p-2">
+                <img
+                  id="lightbox-image"
+                  src=""
+                  alt=""
+                  class="max-w-full max-h-[50vh] sm:max-h-[70vh] lg:max-h-[85vh] object-contain border-2 sm:border-4 border-accent/40 contrast-125"
+                />
+              </div>
+            </div>
+            <div class="flex-1 max-w-full lg:max-w-md text-left lg:border-l-4 lg:border-white/30 lg:pl-8 px-4 sm:px-0">
+              <h3 id="lightbox-title" class="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-wide mb-3 sm:mb-4"></h3>
+              <p id="lightbox-description" class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Control hints -->
+          <div class="pointer-events-none absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 text-accent-dim text-[10px] sm:text-xs tracking-widest uppercase hidden sm:flex gap-6">
+            <span>[Esc] Close</span>
+            <span>[←] [→] Navigate</span>
           </div>
         </div>
-      </button>
-    ))}
-  </div>
+      </div>
+    )}
 
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black">
-    <button
-      id="close-lightbox"
-      class="absolute top-3 right-3 sm:top-6 sm:right-6 text-white text-4xl sm:text-5xl font-light hover:text-red-500 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-white z-10"
-      aria-label="Close lightbox"
-    >
-      ×
-    </button>
-    
-    <!-- Previous Button -->
-    <button
-      id="prev-image"
-      class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-5xl font-light hover:text-white/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-white bg-black/50 backdrop-blur-sm z-10"
-      aria-label="Previous image"
-    >
-      ‹
-    </button>
-    
-    <!-- Next Button -->
-    <button
-      id="next-image"
-      class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 text-white text-4xl sm:text-5xl font-light hover:text-white/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border-2 border-white/40 hover:border-white bg-black/50 backdrop-blur-sm z-10"
-      aria-label="Next image"
-    >
-      ›
-    </button>
-    
-    <div class="h-full flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-8 p-4 sm:p-6 lg:p-12">
-      <div class="shrink-0 max-w-full lg:max-w-[60%] flex items-center justify-center">
-        <img
-          id="lightbox-image"
-          src=""
-          alt=""
-          class="max-w-full max-h-[50vh] sm:max-h-[70vh] lg:max-h-[85vh] object-contain border-2 sm:border-4 border-white/40 contrast-125"
-        />
-      </div>
-      <div class="flex-1 max-w-full lg:max-w-md text-left lg:border-l-4 lg:border-white/30 lg:pl-8 px-4 sm:px-0">
-        <h3 id="lightbox-title" class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-wide mb-3 sm:mb-4"></h3>
-        <p id="lightbox-description" class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed"></p>
-      </div>
+    <div class="mt-12 sm:mt-16">
+      <Footer />
     </div>
   </div>
-</div>
-)}
+</section>
 
 <script is:inline>
   if (typeof window !== 'undefined') {
@@ -124,11 +149,13 @@ try {
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxTitle = document.getElementById('lightbox-title');
     const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxIndex = document.getElementById('lightbox-index');
     const closeLightbox = document.getElementById('close-lightbox');
     const prevButton = document.getElementById('prev-image');
     const nextButton = document.getElementById('next-image');
-    const navbar = document.getElementById('navbar-container');
-    
+    const sideNavbar = document.getElementById('side-navbar');
+    const logoHome = document.getElementById('logo-home');
+
     let currentIndex = 0;
     const images = Array.from(showcaseButtons).map(button => ({
       image: button.getAttribute('data-image'),
@@ -139,32 +166,45 @@ try {
     function showImage(index) {
       if (index < 0) index = images.length - 1;
       if (index >= images.length) index = 0;
-      
+
       currentIndex = index;
       const current = images[currentIndex];
-      
+
       if (lightboxImage && lightboxTitle && lightboxDescription) {
         lightboxImage.src = current.image || '';
         lightboxImage.alt = current.title || '';
         lightboxTitle.textContent = current.title || '';
         lightboxDescription.textContent = current.description || '';
+        lightboxImage.classList.remove('hud-flicker');
+        // force reflow so the animation replays on every image change
+        void lightboxImage.offsetWidth;
+        lightboxImage.classList.add('hud-flicker');
+      }
+      if (lightboxIndex) {
+        lightboxIndex.textContent = `FILE ${String(currentIndex + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
       }
     }
 
     function openLightbox(index) {
-      if (lightbox && navbar) {
+      if (lightbox) {
         showImage(index);
         lightbox.classList.remove('hidden');
-        navbar.classList.add('hidden');
+        // nav visibility is controlled by responsive Tailwind classes, so hide via
+        // inline style rather than clobbering those with classList
+        if (sideNavbar) sideNavbar.style.display = 'none';
+        if (logoHome) logoHome.style.display = 'none';
         document.body.style.overflow = 'hidden';
+        if (window.lenis) window.lenis.stop();
       }
     }
 
     function closeLightboxFunc() {
-      if (lightbox && navbar) {
+      if (lightbox) {
         lightbox.classList.add('hidden');
-        navbar.classList.remove('hidden');
+        if (sideNavbar) sideNavbar.style.display = '';
+        if (logoHome) logoHome.style.display = '';
         document.body.style.overflow = '';
+        if (window.lenis) window.lenis.start();
       }
     }
 

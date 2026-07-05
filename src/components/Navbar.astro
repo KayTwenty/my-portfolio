@@ -1,74 +1,147 @@
 ---
-import { Transition } from "./Transition";
-import ProfileImage from "./profileImage.astro";
-
-interface Props {
-  showNav?: boolean;
-  navRefId: string;
-}
-
-const { showNav, navRefId } = Astro.props;
+const sections = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "showcase", label: "Showcase" },
+];
 ---
 
-<div class="pointer-events-none fixed inset-x-0 top-0 z-30 flex justify-center px-3 sm:px-6 transition-all duration-300" id="navbar-container">
-  <nav class="pointer-events-auto inline-flex items-center rounded-none bg-black/90 backdrop-blur-sm border-2 border-white/20 shadow-2xl shadow-black transition-all duration-300 hover:border-white/40 hover:shadow-red-900/20 max-w-full" id="navbar">
-    <ProfileImage size="small" />
-    <a href="#skills" class="text-gray-300 hover:text-white transition-colors font-medium nav-link uppercase whitespace-nowrap">Skills</a>
-    <a href="#showcase" class="text-gray-300 hover:text-white transition-colors font-medium nav-link uppercase whitespace-nowrap">Showcase</a>
-    <span class="text-gray-600 cursor-not-allowed font-medium transition-all duration-300 uppercase whitespace-nowrap" title="Coming soon" id="blog-text">Blog</span>
-  </nav>
-</div>
+<!-- Top-left fixed logo, jumps back to the hero slide -->
+<a
+  href="#about"
+  id="logo-home"
+  class="pointer-events-auto fixed top-3 left-3 sm:top-5 sm:left-5 z-30 block"
+  aria-label="Jump to top"
+>
+  <div class="hud-corners rounded-none cursor-pointer bg-black shadow-2xl ring-2 ring-white/30 transform transition ease-out hover:scale-105 hover:ring-accent/60 active:translate-y-px border-2 border-white/20">
+    <div class="p-0.5 sm:p-1">
+      <img
+        src="https://avatars.githubusercontent.com/kaytwenty"
+        alt="Portrait of David Anton"
+        class="grayscale contrast-125 w-8 sm:w-10"
+      />
+    </div>
+  </div>
+</a>
+
+<!-- Numbered section-jump rail.
+     Mobile: compact horizontal HUD pill pinned to the bottom-center.
+     sm+:    vertical rail on the right, clear of the browser scrollbar. -->
+<nav
+  id="side-navbar"
+  class="pointer-events-none fixed z-30 font-mono flex items-center gap-4
+         bottom-4 left-1/2 -translate-x-1/2 translate-y-0 flex-row
+         sm:bottom-auto sm:left-auto sm:translate-x-0 sm:-translate-y-1/2 sm:right-10 sm:top-1/2 sm:flex-col sm:items-end sm:gap-5"
+  aria-label="Section navigation"
+>
+  <ul
+    class="pointer-events-auto flex flex-row items-center gap-4
+           bg-black/70 backdrop-blur-sm px-4 py-2.5 border border-white/15
+           sm:flex-col sm:items-end sm:gap-4 sm:bg-transparent sm:backdrop-blur-none sm:px-0 sm:py-0 sm:border-0"
+  >
+    {sections.map((section, i) => (
+      <li>
+        <button
+          class="section-link group flex items-center gap-2 text-gray-500 hover:text-accent transition-colors uppercase whitespace-nowrap min-h-11 min-w-11 sm:min-h-0 sm:min-w-0 justify-center"
+          data-target={section.id}
+          aria-label={`Jump to ${section.label}`}
+        >
+          <span class="section-link-label hidden sm:inline text-xs tracking-[0.15em] opacity-0 group-hover:opacity-100 transition-opacity">{section.label}</span>
+          <span class="section-link-num text-base font-bold tracking-widest">{String(i + 1).padStart(2, "0")}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+
+  <!-- Live scroll-linked HUD readout (desktop only; hidden on the mobile pill) -->
+  <div class="pointer-events-none hidden sm:flex flex-col items-end gap-1 text-accent-dim">
+    <span class="text-[10px] tracking-widest" id="hud-depth">DEPTH 0000M</span>
+    <span class="text-[10px] tracking-widest" id="hud-signal">SIG 100%</span>
+  </div>
+</nav>
+
+<style>
+  .section-link.is-active .section-link-num {
+    color: var(--color-accent);
+  }
+  .section-link.is-active .section-link-label {
+    opacity: 1;
+    color: var(--color-accent-dim);
+  }
+</style>
 
 <script>
-  let lastScrollY = window.scrollY;
-  const navbar = document.getElementById('navbar');
-  const blogText = document.getElementById('blog-text');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const sectionLinks = document.querySelectorAll<HTMLElement>('.section-link');
+  const logoHome = document.getElementById('logo-home');
+  const hudDepth = document.getElementById('hud-depth');
+  const hudSignal = document.getElementById('hud-signal');
+  const sectionIds = Array.from(sectionLinks).map(link => link.dataset.target);
 
-  // Initialize navbar size based on screen width and scroll position
-  function updateNavbar() {
-    const currentScrollY = window.scrollY;
-    const isMobile = window.innerWidth < 640;
-    
-    if (isMobile) {
-      // Mobile: always small
-      navbar?.classList.add('px-3', 'py-2', 'gap-3', 'mt-3');
-      navbar?.classList.remove('px-4', 'px-6', 'py-3', 'gap-4', 'gap-6', 'mt-6');
-      blogText?.classList.add('text-sm');
-      blogText?.classList.remove('text-lg');
-      navLinks.forEach(link => {
-        link.classList.add('text-sm', 'tracking-wide');
-        link.classList.remove('text-lg', 'tracking-wider');
-      });
-    } else if (currentScrollY > 100) {
-      // Desktop scrolled: small
-      navbar?.classList.add('px-4', 'py-2', 'gap-4', 'mt-3');
-      navbar?.classList.remove('px-3', 'px-6', 'py-3', 'gap-3', 'gap-6', 'mt-6');
-      blogText?.classList.add('text-sm');
-      blogText?.classList.remove('text-lg');
-      navLinks.forEach(link => {
-        link.classList.add('text-sm');
-        link.classList.remove('text-lg');
-      });
+  function jumpTo(id: string | undefined) {
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.scrollTo(target, { offset: 0, duration: 1.2 });
     } else {
-      // Desktop at top: large
-      navbar?.classList.add('px-6', 'py-3', 'gap-6', 'mt-6');
-      navbar?.classList.remove('px-3', 'px-4', 'py-2', 'gap-3', 'gap-4', 'mt-3');
-      blogText?.classList.add('text-lg');
-      blogText?.classList.remove('text-sm');
-      navLinks.forEach(link => {
-        link.classList.add('text-lg', 'tracking-wider');
-        link.classList.remove('text-sm', 'tracking-wide');
-      });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  // Run on load
-  updateNavbar();
+  sectionLinks.forEach(link => {
+    link.addEventListener('click', () => jumpTo(link.dataset.target));
+  });
+  logoHome?.addEventListener('click', (e) => {
+    e.preventDefault();
+    jumpTo('about');
+  });
 
-  // Run on scroll
-  window.addEventListener('scroll', updateNavbar);
+  function setActive(id: string) {
+    sectionLinks.forEach(link => {
+      link.classList.toggle('is-active', link.dataset.target === id);
+    });
+  }
 
-  // Run on resize
-  window.addEventListener('resize', updateNavbar);
+  // Pick the active section by which one's top has passed a reference line ~40%
+  // down the viewport. This is height-agnostic, so tall sections (Skills,
+  // Projects) that never reach a visibility threshold still activate correctly
+  // -- fixes the mobile "stuck on 02" issue.
+  const sectionEls = sectionIds
+    .map(id => (id ? document.getElementById(id) : null))
+    .filter((el): el is HTMLElement => el !== null);
+
+  function updateActiveSection() {
+    const marker = window.innerHeight * 0.4;
+    let currentId = sectionEls[0]?.id;
+    for (const el of sectionEls) {
+      if (el.getBoundingClientRect().top <= marker) {
+        currentId = el.id;
+      }
+    }
+    if (currentId) setActive(currentId);
+  }
+
+  updateActiveSection();
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('resize', updateActiveSection);
+
+  // Tie the HUD depth/signal readout to how far the user has scrolled down the page
+  function updateHud() {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollHeight > 0 ? Math.min(window.scrollY / scrollHeight, 1) : 0;
+
+    if (hudDepth) {
+      const depth = Math.round(progress * 2400);
+      hudDepth.textContent = `DEPTH ${depth.toString().padStart(4, '0')}M`;
+    }
+    if (hudSignal) {
+      const signal = Math.round(100 - progress * 35);
+      hudSignal.textContent = `SIG ${signal}%`;
+    }
+  }
+
+  updateHud();
+  window.addEventListener('scroll', updateHud);
 </script>

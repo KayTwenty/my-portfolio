@@ -1,30 +1,42 @@
 ---
 import ProfileImage from './profileImage.astro';
 import Socials from './Socials.astro';
-import SocialIconWrapper from './SocialIconWrapper';
-import { FaSkull } from 'react-icons/fa';
 ---
 
-<div>
-  <div class='flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left'>
-    <ProfileImage size='large' />
-    <div class='flex-1'>
-      <h1 class='text-2xl sm:text-3xl md:text-4xl font-bold text-white uppercase tracking-wide flex items-center justify-center sm:justify-start gap-2 sm:gap-3 flex-wrap'>
-        Anton <span class="text-xl sm:text-2xl md:text-3xl"><SocialIconWrapper client:visible Icon={FaSkull} className="text-white inline-block"/></span>
-      </h1>
-      <h2 class='align-middle text-base sm:text-lg leading-6 text-gray-400 uppercase tracking-wider mt-2'>
-        Network Engineer & Developer
+<section id="about" class="snap-start min-h-dvh w-full relative flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-28 py-24">
+  <span class="section-index" aria-hidden="true" data-parallax="0.45">01</span>
+
+  <div class="relative z-10 max-w-3xl">
+    <p class="font-mono text-accent-dim text-xs sm:text-sm tracking-[0.3em] uppercase mb-4" data-reveal data-reveal-delay="0">// About</p>
+
+    <h1
+      class="glitch-text font-display font-bold text-white uppercase leading-[0.85] text-[18vw] sm:text-[13vw] md:text-[10vw] lg:text-8xl xl:text-9xl tracking-tight"
+      data-text="Anton"
+      data-reveal
+      data-reveal-delay="80"
+    >
+      Anton
+    </h1>
+
+    <div class="flex flex-wrap items-center gap-3 mt-3 sm:mt-4" data-reveal data-reveal-delay="160">
+      <h2 class="font-mono text-base sm:text-lg text-gray-400 uppercase tracking-wider">
+        Network Engineer &amp; Developer
       </h2>
     </div>
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 mt-8 sm:mt-10" data-reveal data-reveal-delay="240">
+      <ProfileImage size="large" />
+      <article class="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-xl">
+        I'm <span id="age"></span>, building stuff with <strong class="font-bold text-accent border-b-2 border-accent/60">Perl</strong> &amp; <strong class="font-bold text-blue-400 border-b-2 border-blue-400/60">TypeScript</strong>.
+        Coding web apps, spinning <strong class="font-bold text-pink-400 border-b-2 border-pink-400/60">hyperpop</strong> &amp; <strong class="font-bold text-purple-400 border-b-2 border-purple-400/60">dubstep</strong> sets at underground spots, and making things with 3D printing. If it's creative or breaks the mold, I'm into it.
+      </article>
+    </div>
+
+    <div class="mt-8 sm:mt-10" data-reveal data-reveal-delay="320">
+      <Socials />
+    </div>
   </div>
-  <article class='mt-6 sm:mt-9 text-lg sm:text-xl text-gray-200 leading-relaxed'>
-    I'm <span id='age'></span>, building stuff with <strong class='font-bold text-red-400 border-b-2 border-red-400/60'>Perl</strong> & <strong class='font-bold text-blue-400 border-b-2 border-blue-400/60'>TypeScript</strong>. 
-    Coding web apps, spinning <strong class='font-bold text-pink-400 border-b-2 border-pink-400/60'>hyperpop</strong> & <strong class='font-bold text-purple-400 border-b-2 border-purple-400/60'>dubstep</strong> sets at underground spots, and making things with 3D printing. If it's creative or breaks the mold, I'm into it.
-  </article>
-  <div class='mt-9'>
-    <Socials />
-  </div>
-</div>
+</section>
 
 <script>
   import { getYearDiffFromDate } from '../utils/getYearDiffFromDate';

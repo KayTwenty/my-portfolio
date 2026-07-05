@@ -101,7 +101,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    category: "Tools & DevOps",
+    category: "Tools",
     skills: [
       {
         title: "Git",

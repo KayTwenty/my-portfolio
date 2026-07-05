@@ -2,13 +2,20 @@
 
 <img src="https://img.shields.io/github/last-commit/KayTwenty/my-portfolio?style=for-the-badge" alt="Commit"/> <img src="https://img.shields.io/github/license/KayTwenty/my-portfolio?style=for-the-badge" alt="License"/>
 
-My personal portfolio site built with Astro, React, and Tailwind. Shows off my projects, skills, and what I'm working on.
+My personal site: a one-page, HUD-styled portfolio inspired by Bungie's *Marathon*. Full-bleed scroll-snapped sections, a live 3D scene, and a few surprises.
 
-## What's Inside
+## Highlights
 
-Clean responsive design with a dark/grunge aesthetic. Fast static site generation. Mobile-optimized with proper touch targets. Showcase section for hardware builds and projects. Dynamic skill filtering by category.
+- **One page, four sections**: About, Skills, Projects, Showcase, each a full-screen scroll-snap slide
+- **Tactical HUD chrome**: corner brackets, scanlines, glitch text, a numbered section-jump rail
+- **Live 3D background**: a rotating wireframe core with a geolocated "you are here" marker
+- **Boot sequence intro** and an IQ-style riddle gate on the contact form (no boring math CAPTCHAs)
 
-## Running Locally
+## Stack
+
+Astro 5 · React 19 · Tailwind 4 · TypeScript · Three.js
+
+## Run locally
 
 ```bash
 git clone https://github.com/KayTwenty/my-portfolio.git
@@ -17,16 +24,12 @@ npm install
 npm run dev
 ```
 
-Site runs at `http://localhost:4321`
+→ `localhost:4321`
 
-## Built With
+## Deploy
 
-Astro 5, React 19, Tailwind 4, TypeScript, react-icons for SVG icons.
-
-## Deployment
-
-Currently deployed on Vercel using the static adapter. Also works with Netlify or any static hosting.
+Static build, currently on Vercel. Works on any static host.
 
 ## License
 
-MIT License - do whatever you want with this.
+MIT. Do whatever you want with this.

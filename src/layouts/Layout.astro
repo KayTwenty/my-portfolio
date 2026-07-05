@@ -1,15 +1,9 @@
 ---
 import { GradientBackground } from "../components/GradientBackground";
 import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import BootSequence from "../components/BootSequence.astro";
+import SceneBackground from "../components/SceneBackground.astro";
 import '../styles/global.css';
-
-interface Props {
-  showNav?: boolean;
-  navRefId: string;
-}
-
-const { showNav, navRefId } = Astro.props;
 ---
 
 <html lang="en">
@@ -55,21 +49,29 @@ const { showNav, navRefId } = Astro.props;
     </script>
   </head>
   <body>
-    <div id="home" class="bg-black antialiased selection:bg-red-600 selection:text-white min-h-screen">
+    <div id="home" class="bg-black antialiased selection:bg-accent selection:text-black w-full font-sans relative">
+      <BootSequence />
+
       <svg class="pointer-events-none fixed isolate z-50 opacity-40 mix-blend-overlay" width="100%" height="100%">
         <filter id="filterv2">
           <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="5" stitchTiles="stitch"></feTurbulence>
         </filter>
         <rect width="100%" height="100%" filter="url(#filterv2)"></rect>
       </svg>
-      <div class="mx-auto w-full max-w-3xl px-4 sm:px-6">
-        <Navbar showNav={showNav} navRefId={navRefId} />
-        <main role="main" class="relative z-10 pt-24 sm:pt-36 md:pt-48 text-base sm:text-lg text-gray-100 space-y-12 sm:space-y-16">
-          <slot />
-          <Footer />
-        </main>
-      </div>
+
       <GradientBackground client:only="react"/>
+      <SceneBackground />
+      <div class="tactical-grid pointer-events-none fixed inset-0 z-0 opacity-[0.07]" data-parallax-fixed="0.06"></div>
+
+      <Navbar />
+
+      <div class="relative z-10 w-full text-base sm:text-lg text-gray-100">
+        <slot />
+      </div>
     </div>
+
+    <script>
+      import '../scripts/scroll.ts';
+    </script>
   </body>
 </html>

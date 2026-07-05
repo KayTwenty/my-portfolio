@@ -3,46 +3,51 @@ import Skill from "./Skill.astro";
 import { skillCategories } from "../data/skills";
 ---
 
-<div class="mt-12 sm:mt-16" id="skills">
-  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-widest border-b-4 border-white/30 pb-2 sm:pb-3">Skills</h2>
-  <p class="mt-5 sm:mt-7 text-lg sm:text-xl text-gray-300">
-    I have been involved in this endeavor for nearly <span id="experience"></span> years, 
-    and it has been a journey filled with valuable lessons and personal growth.
-  </p>
-  
-  <!-- Category Filter Tags -->
-  <div class="mt-6 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3" id="category-filters">
-    <button 
-      data-category="all" 
-      class="category-tag active px-3 sm:px-4 py-2.5 sm:py-2 bg-white text-black font-bold hover:bg-gray-200 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white uppercase tracking-wider text-center border-2 border-white text-xs sm:text-sm min-h-11"
-   >
-      All
-    </button>
-    {
-      skillCategories.map((category) => (
-        <button 
-          data-category={category.category} 
-          class="category-tag px-3 sm:px-4 py-2.5 sm:py-2 bg-black border-2 border-white/40 text-gray-300 font-bold hover:bg-white/10 hover:border-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white uppercase tracking-wider text-center text-xs sm:text-sm min-h-11"
-        >
-          {category.category}
-        </button>
-      ))
-    }
-  </div>
+<section id="skills" class="snap-start min-h-dvh w-full relative flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-28 py-24">
+  <span class="section-index" aria-hidden="true" data-parallax="0.45">02</span>
 
-  <!-- Skills Grid -->
-  <div class="mt-6 sm:mt-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3" id="skills-grid">
-    {
-      skillCategories.map((category) => (
-        category.skills.map((skill) => (
-          <div data-category={category.category}>
-            <Skill title={skill.title} icon={skill.icon} link={skill.link} />
-          </div>
+  <div class="relative z-10 max-w-4xl">
+    <p class="font-mono text-accent-dim text-xs sm:text-sm tracking-[0.3em] uppercase mb-4" data-reveal data-reveal-delay="0">// 02</p>
+    <h2 class="glitch-text font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-widest border-b-4 border-white/30 pb-2 sm:pb-3" data-text="Skills" data-reveal data-reveal-delay="80">Skills</h2>
+    <p class="mt-5 sm:mt-7 text-lg sm:text-xl text-gray-300" data-reveal data-reveal-delay="160">
+      I have been involved in this endeavor for nearly <span id="experience"></span> years,
+      and it has been a journey filled with valuable lessons and personal growth.
+    </p>
+
+    <!-- Category Filter Tags -->
+    <div class="mt-6 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 font-mono" id="category-filters" data-reveal data-reveal-delay="240">
+      <button
+        data-category="all"
+        class="category-tag active px-3 sm:px-4 py-2.5 sm:py-2 bg-accent text-black font-bold hover:bg-accent/80 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent uppercase tracking-wider text-center border-2 border-accent text-xs sm:text-sm min-h-11"
+     >
+        All
+      </button>
+      {
+        skillCategories.map((category) => (
+          <button
+            data-category={category.category}
+            class="category-tag px-3 sm:px-4 py-2.5 sm:py-2 bg-black border-2 border-white/40 text-gray-300 font-bold hover:bg-accent/10 hover:border-accent hover:text-accent transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent uppercase tracking-wider text-center text-xs sm:text-sm min-h-11"
+          >
+            {category.category}
+          </button>
         ))
-      ))
-    }
+      }
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="mt-6 sm:mt-9 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3" id="skills-grid" data-reveal data-reveal-delay="320">
+      {
+        skillCategories.map((category) => (
+          category.skills.map((skill) => (
+            <div data-category={category.category}>
+              <Skill title={skill.title} icon={skill.icon} link={skill.link} />
+            </div>
+          ))
+        ))
+      }
+    </div>
   </div>
-</div>
+</section>
 
 <script>
   import { getYearDiffFromDate } from "../utils/getYearDiffFromDate";
@@ -60,10 +65,10 @@ import { skillCategories } from "../data/skills";
       
       // Update active state
       categoryTags.forEach(t => {
-        t.classList.remove('active', 'bg-white', 'text-black', 'border-white');
+        t.classList.remove('active', 'bg-accent', 'text-black', 'border-accent');
         t.classList.add('bg-black', 'text-gray-300', 'border-white/40');
       });
-      tag.classList.add('active', 'bg-white', 'text-black', 'border-white');
+      tag.classList.add('active', 'bg-accent', 'text-black', 'border-accent');
       tag.classList.remove('bg-black', 'text-gray-300', 'border-white/40');
 
       // Filter skills

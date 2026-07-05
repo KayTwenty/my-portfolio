@@ -1,14 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+    --color-accent: #d7ff3a;
+    --color-accent-dim: #d7ff3a80;
+    --font-display: "Rajdhani", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+}
 
 html {
     scroll-behavior: smooth;
-    /* Prevent horizontal scroll on mobile */
+    /* No scroll-snap: it intercepts the wheel and re-aligns to a section, which
+       blocks free manual scrolling. The section-jump nav still smooth-scrolls to
+       each section via JS (scrollIntoView), so you keep the "jump to section"
+       feel while scrolling normally. */
     overflow-x: hidden;
+    background-color: #000;
+}
+
+/* --- Lenis smooth scroll ---
+   When Lenis is active it drives scrolling itself, so native CSS smoothing must
+   step aside to avoid the two fighting. (Lenis adds these classes to <html>.) */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* --- Reveal on scroll ---
+   Elements tagged [data-reveal] start shifted/faded and settle into place the
+   first time they enter the viewport. Optional variants pick the entry direction. */
+[data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+    transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+[data-reveal="left"] {
+    transform: translate3d(-48px, 0, 0);
+}
+[data-reveal="right"] {
+    transform: translate3d(48px, 0, 0);
+}
+[data-reveal="scale"] {
+    transform: scale(0.92);
+}
+[data-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    [data-parallax] {
+        transform: none !important;
+    }
 }
 
 body {
-    /* Prevent horizontal scroll on mobile */
-    overflow-x: hidden;
+    /* Note: do NOT set overflow-x here. `html` already has `overflow-x: hidden`,
+       which clips horizontal overflow for the whole page. Setting it on `body`
+       too turns `body` into a second scroll container (overflow-x:hidden forces
+       overflow-y to compute as `auto`), producing a second scrollbar that fights
+       the main document scroll. */
+    background-color: #000;
     /* Better font rendering on mobile */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -36,4 +108,148 @@ body {
 /* Smooth scrolling for all elements */
 * {
     -webkit-overflow-scrolling: touch;
+}
+
+/* HUD corner brackets: 4 accent-colored L-tick marks, one per corner, that brighten on hover */
+.hud-corners {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 2px 10px, 10px 2px, 2px 10px, 10px 2px, 2px 10px, 10px 2px, 2px 10px, 10px 2px;
+    background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+    background-image:
+        linear-gradient(var(--color-accent-dim), var(--color-accent-dim)), linear-gradient(var(--color-accent-dim), var(--color-accent-dim)),
+        linear-gradient(var(--color-accent-dim), var(--color-accent-dim)), linear-gradient(var(--color-accent-dim), var(--color-accent-dim)),
+        linear-gradient(var(--color-accent-dim), var(--color-accent-dim)), linear-gradient(var(--color-accent-dim), var(--color-accent-dim)),
+        linear-gradient(var(--color-accent-dim), var(--color-accent-dim)), linear-gradient(var(--color-accent-dim), var(--color-accent-dim));
+    transition: background-image 0.3s ease;
+}
+.hud-corners:hover {
+    background-image:
+        linear-gradient(var(--color-accent), var(--color-accent)), linear-gradient(var(--color-accent), var(--color-accent)),
+        linear-gradient(var(--color-accent), var(--color-accent)), linear-gradient(var(--color-accent), var(--color-accent)),
+        linear-gradient(var(--color-accent), var(--color-accent)), linear-gradient(var(--color-accent), var(--color-accent)),
+        linear-gradient(var(--color-accent), var(--color-accent)), linear-gradient(var(--color-accent), var(--color-accent));
+}
+
+/* Scanline sweep bar used on hover states (Card, Showcase, Skill) */
+@keyframes scan-sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+.hud-scanline {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 2px;
+    overflow: hidden;
+    pointer-events: none;
+}
+.hud-scanline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.group:hover .hud-scanline::after {
+    opacity: 1;
+    animation: scan-sweep 1.2s linear infinite;
+}
+
+/* Glitchy HUD flicker, played once when the lightbox swaps images */
+@keyframes hud-flicker {
+    0% { opacity: 0; filter: brightness(2) contrast(1.4) saturate(0); }
+    15% { opacity: 1; }
+    30% { opacity: 0.35; filter: brightness(1.6) contrast(1.2) saturate(0.4); }
+    45% { opacity: 1; filter: brightness(1) contrast(1) saturate(1); }
+    100% { opacity: 1; }
+}
+.hud-flicker {
+    animation: hud-flicker 0.4s ease-out;
+}
+
+/* Fixed, full-viewport tactical grid overlay -- sits behind content, above the noise filter */
+.tactical-grid {
+    background-image:
+        linear-gradient(to right, var(--color-accent) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-accent) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+/* Giant, faint background numeral used to mark each full-screen section (01, 02...) */
+.section-index {
+    position: absolute;
+    right: 0.25rem;
+    bottom: -0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(6rem, 28vw, 22rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-accent-dim);
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+/* Glitch/RGB-split flicker on hover, for the big section headings */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: transparent;
+}
+.glitch-text:hover::before {
+    color: var(--color-accent);
+    opacity: 0.7;
+    animation: glitch-shift 0.3s steps(2, jump-none) infinite;
+}
+.glitch-text:hover::after {
+    color: #ff2e6a;
+    opacity: 0.5;
+    animation: glitch-shift 0.3s steps(2, jump-none) infinite reverse;
+}
+@keyframes glitch-shift {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(-2px, 1px); }
+    100% { transform: translate(2px, -1px); }
+}
+
+/* Boot sequence intro overlay */
+.boot-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s ease;
+}
+.boot-overlay.boot-done {
+    opacity: 0;
+    pointer-events: none;
+}
+@keyframes boot-bar-fill {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+.boot-bar-fill {
+    animation: boot-bar-fill 1s ease-in-out forwards;
+}
+@keyframes boot-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+.boot-cursor {
+    animation: boot-blink 1s step-end infinite;
 }

@@ -1,0 +1,45 @@
+---
+---
+
+<div id="boot-overlay" class="boot-overlay font-mono">
+  <div class="hud-corners w-full max-w-md px-8 py-6 text-xs sm:text-sm tracking-widest uppercase">
+    <p class="text-white">&gt; Initializing Anton.sys<span class="boot-cursor">_</span></p>
+    <p class="mt-2 text-gray-500">&gt; Loading portfolio modules...</p>
+    <div class="mt-4 h-1 w-full bg-white/10 overflow-hidden">
+      <div class="h-full bg-accent boot-bar-fill"></div>
+    </div>
+    <p id="boot-status" class="mt-4 text-accent opacity-0">&gt; Access granted</p>
+  </div>
+</div>
+
+<style>
+  #boot-status {
+    animation: boot-status-reveal 0.3s ease forwards;
+    animation-delay: 1s;
+  }
+  @keyframes boot-status-reveal {
+    to { opacity: 1; }
+  }
+</style>
+
+<script>
+  const overlay = document.getElementById('boot-overlay');
+  const alreadyBooted = sessionStorage.getItem('bootPlayed') === 'true';
+
+  function finishBoot() {
+    overlay?.classList.add('boot-done');
+    sessionStorage.setItem('bootPlayed', 'true');
+  }
+
+  if (alreadyBooted) {
+    overlay?.classList.add('boot-done');
+  } else {
+    const timer = setTimeout(finishBoot, 1400);
+    const skip = () => {
+      clearTimeout(timer);
+      finishBoot();
+    };
+    window.addEventListener('click', skip, { once: true });
+    window.addEventListener('keydown', skip, { once: true });
+  }
+</script>

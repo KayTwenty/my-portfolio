@@ -8,11 +8,12 @@ interface Props {
 const { icon, title, link } = Astro.props;
 ---
 
-<a href={link} target="_blank" class="min-h-11 block">
+<a href={link} target="_blank" class="min-h-11 block group">
   <div
-    class="cursor-pointer flex items-center overflow-hidden bg-black border-2 border-white/30 py-3 sm:py-4 px-2 sm:px-3 shadow-2xl transition duration-300 hover:border-white hover:bg-white/5"
+    class="relative cursor-pointer flex items-center overflow-hidden bg-black border-2 border-white/30 py-3 sm:py-4 px-2 sm:px-3 shadow-2xl transition duration-300 group-hover:border-accent group-hover:bg-accent/5"
   >
+    <span class="hud-scanline"></span>
     <img src={icon + "&color=fff"} alt={title} class="w-6 sm:w-7 shrink-0" />
-    <p class="ml-2 text-sm sm:text-base md:text-lg text-white font-bold uppercase tracking-wide truncate">{title}</p>
+    <p class="ml-2 text-sm sm:text-base md:text-lg text-white font-mono font-bold uppercase tracking-wide truncate">{title}</p>
   </div>
 </a>

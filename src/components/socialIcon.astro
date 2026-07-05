@@ -10,7 +10,7 @@ interface Props {
 const { title, Icon, link } = Astro.props;
 ---
 
-<a href={link} class="group flex items-center space-x-2 sm:space-x-3 bg-black border-2 border-white/40 px-3 sm:px-4 py-2 sm:py-2.5 transition-all duration-300 hover:scale-105 sm:hover:scale-[1.2] hover:border-white hover:shadow-lg hover:shadow-red-900/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white uppercase tracking-wider min-h-11" target="_blank" aria-label={title}>
+<a href={link} class="group flex items-center space-x-2 sm:space-x-3 bg-black border-2 border-white/40 px-3 sm:px-4 py-2 sm:py-2.5 transition-all duration-300 hover:scale-105 sm:hover:scale-[1.2] hover:border-accent hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent uppercase tracking-wider min-h-11 font-mono" target="_blank" aria-label={title}>
   <div class="text-white text-lg sm:text-xl md:text-2xl">
     <SocialIconWrapper client:visible Icon={Icon} className="text-white"/>
   </div>
